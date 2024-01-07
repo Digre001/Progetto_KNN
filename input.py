@@ -1,5 +1,5 @@
 
-class input:
+class Input():
     '''
     spiegazione della classe
     '''
