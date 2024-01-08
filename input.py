@@ -1,5 +1,5 @@
 
-class Input():
+class Input:
     '''
     spiegazione della classe
     '''
@@ -49,3 +49,38 @@ class Input():
                 print ("Errore: il modello di valutazione non è adatto (Holdout o Leave-p-out Cross Validation). Riprovare")
         # Richiama la funzione Metriche per la selezione delle metriche (da implementare, considerando una scelta multipla)
         self.Metriche=self.Selzione_metriche() 
+        return {
+            'k': self.k,
+            'Modello_valutazione': self.Modello_valutazione,
+            'train_size': self.train_size,
+            'N_esperimenti': self.N_esperimenti,
+            'Metriche': self.Metriche
+        }
+    
+    def Selzione_metriche(self):
+        print("Selezionare le metriche da valutare:\n1. Accuracy Rate\n2. Error Rate\n3. Sensitivity\n4. Specificity\n5. Geometric Mean")
+        associazione = {
+            1: 'Accuracy Rate',
+            2: 'Error Rate',
+            3: 'Sensitivity',
+            4: 'Specificity',
+            5: 'Geometric Mean'
+        }
+        while True:
+            scelta = input("Inserire il numero corrispondete alla metrica (separare con una virgola in caso di scelta multipla): ")
+            lista_scelta = [int(numero) for numero in scelta.split(',')]
+            if all (0 < numero < 6 for numero in lista_scelta):
+                metriche_selezionate = [associazione[numero] for numero in lista_scelta]
+                break
+            else:
+                print("Errore: inserire un valore valido. Riprova.")
+        return metriche_selezionate
+
+
+            
+
+if __name__ == "__main__":
+    x=Input()
+    x.user_input()
+    print (f"{x.k} {x.Modello_valutazione}{x.train_size}{x.Metriche}")
+    
