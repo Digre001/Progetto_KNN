@@ -1,7 +1,7 @@
 
 class Input:
     '''
-    spiegazione della classe
+    Questa classe gestisce l'acquisizione di input utente relativi a un modello di valutazione
     '''
     def __init__(self):
         '''
@@ -11,8 +11,10 @@ class Input:
         self.k = None
         # Scelta del modello di valutaozine
         self.Modello_valutazione = None
-        #Dimensione del train size e di conseguenza del test size
+        # Dimensione del train size e di conseguenza del test size
         self.train_size = None
+        # Numero si campioni da studiare per il leave-p-out
+        self.p = None
         # Se modello Leave-p-out Cross Validation e scelto allora decidere il numero di esperimenti 
         self.N_esperimenti = None
         # Metriche da valutare nel modello
@@ -31,8 +33,8 @@ class Input:
         uscita=False
         while not uscita:
             #Utilizza un ciclo while per garantire il corretto inserimento del modello di valutazione 
-            self.Modello_valutazione=input("Seleziona il modello di valutazione (Holdout o Leave-p-out Cross Validation): ").lower().strip()
-            if self.Modello_valutazione == "holdout":
+            self.Modello_valutazione=input("Seleziona il modello di valutazione (H per Holdout o L per Leave-p-out Cross Validation): ").lower().strip()
+            if self.Modello_valutazione == "h":
                 while True:
                         #Utilizza un secondo ciclo while per garantire il corretto inserimento della variabile train_size compresa tra 0 e 1
                         self.train_size = float(input("Inserire e del dataset utilizata per il training (es. 0.7 per 70%): "))
@@ -42,7 +44,8 @@ class Input:
                             break
                         else:
                             print("Errore: inserire un valore valido compreso tra 0 e 1. Riprova.")
-            elif self.Modello_valutazione == "leave-p-outcrossvalidation":
+            elif self.Modello_valutazione == "l":
+                self.p=int(input("Inserire il numero di campioni da studiare (p): "))
                 self.N_esperimenti=int(input("Inserire il numero di esperimenti (K): "))
                 uscita= True
             else:
@@ -53,12 +56,18 @@ class Input:
             'k': self.k,
             'Modello_valutazione': self.Modello_valutazione,
             'train_size': self.train_size,
+            'p': self.p,
             'N_esperimenti': self.N_esperimenti,
             'Metriche': self.Metriche
         }
     
     def Selzione_metriche(self):
+        '''
+        Questa funzione permette all'utente di selezionare le metriche di valutazione.
+        Restituisce una lista di metriche associate ai numeri inseriti dall'utente.
+        '''
         print("Selezionare le metriche da valutare:\n1. Accuracy Rate\n2. Error Rate\n3. Sensitivity\n4. Specificity\n5. Geometric Mean")
+        # Dizionario che associa i numeri alle metriche
         associazione = {
             1: 'Accuracy Rate',
             2: 'Error Rate',
@@ -68,19 +77,12 @@ class Input:
         }
         while True:
             scelta = input("Inserire il numero corrispondete alla metrica (separare con una virgola in caso di scelta multipla): ")
+            # Converte i numeri da stringa a intero e li mette in una lista
             lista_scelta = [int(numero) for numero in scelta.split(',')]
+            # Verifica che i numeri siano compresi tra 1 e 5
             if all (0 < numero < 6 for numero in lista_scelta):
                 metriche_selezionate = [associazione[numero] for numero in lista_scelta]
                 break
             else:
                 print("Errore: inserire un valore valido. Riprova.")
         return metriche_selezionate
-
-
-            
-
-if __name__ == "__main__":
-    x=Input()
-    x.user_input()
-    print (f"{x.k} {x.Modello_valutazione}{x.train_size}{x.Metriche}")
-    
