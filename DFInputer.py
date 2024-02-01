@@ -7,15 +7,18 @@ class dfInputer:
     def __init__(self, df):
         self.df = df
 
-    def impute_missing_values(self, df):
+    def handle_missing_values(self, method):
         '''
         Metodo per riempire i valori mancanti di un dataframe con la moda della colonna corripondente
         '''
-        
-        for col in df.columns:
-            if df[col].isnull().any():
-                mode_value = df[col].mode()[0] 
-                df[col].fillna(mode_value, inplace=True)
-
-        return df
+        if method == 'drop':
+            self.df.dropna(inplace=True)
+        elif method == 'mean':
+            self.df.fillna(self.df.mean(), inplace=True)
+        elif method == 'median':
+            self.df.fillna(self.df.median(), inplace=True)
+        elif method == 'mode':
+            for col in self.df.columns:
+                self.df[col].fillna(self.df[col].mode()[0], inplace=True)
+        return self.df
 
