@@ -25,6 +25,7 @@ class Input:
     def user_input(self):
         '''
         Questa funzione chiede all'utente di inserire gli input inizializzati in precedenza tramite diverse metodologie:
+        - Gestione: Richiede l'inserimento di un valore intero per la gestione dei valori mancanti.
         - k: Richiede un valore intero per k utilizzando il comando int input.
         - Modello_valutazione: Richiede l'inserimento di un modello di valutazione, eliminando gli spazi e convertendo le lettere maiuscole in minuscole.
         - train_size: Richiede un valore float compreso tra 0 e 1 per la percentuale del dataset utilizzata per il training.
