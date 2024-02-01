@@ -5,6 +5,7 @@ Questo progetto implementa un classificatore k-Nearest Neighbors (k-NN) in Pytho
 L'obiettivo è consentire agli utenti di caricare un dataset, gestire i valori mancanti, sviluppare un classificatore k-NN e valutarne le prestazioni utilizzando diverse metriche e metodi di validazione.
 
 # Il programma consente agli utenti di specificare i seguenti parametri:
+-   Gestione: chiede all'utente di scegleire il metodo piu appropriato da utilizare per la gestione dei dati mancati nel Dataframe (eliminaizone, media, moda, mediana)
 -	Numero di vicini (k): chiede all'utente di inserire un numero intero per specificare il numero di vicini da studiare
 -   Modello di valutazione (Holdout o Leave-p-out cross validattion): chiede all'utente di selesionare il modello di valutazione,"H" per Holdout e "L" per Leave-p-out cross validation 
 -   Train size: nel caso di modello di valutazione Holdout, chiede all'utente di insere una percentuale float compresa tra 0 e 1 del database da usare nel training
