@@ -1,4 +1,3 @@
-from ReaderFactory import readerfactory
 
 class dfInputer:
     '''
