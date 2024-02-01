@@ -88,3 +88,20 @@ class Input:
             else:
                 print("Errore: inserire un valore valido. Riprova.")
         return metriche_selezionate
+    
+    def Gestione_valori_mancanti(self):
+        print("Selezionare la gestione dei valori mancanti:\n1. Eliminazione\n2. Media\n3. Mediana\n4. Moda")
+        associazione = {
+            1: 'Eliminazione',
+            2: 'Media',
+            3: 'Mediana',
+            4: 'Moda'
+        }
+        while True:
+            scelta = int(input("Inserire il numero corrispondete alla gestione dei valori mancanti: "))
+            if 0 < scelta < 5:
+                gestione_selezionata = associazione[scelta]
+                break
+            else:
+                print("Errore: inserire un valore valido. Riprova.")
+        return gestione_selezionata
