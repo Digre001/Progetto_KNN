@@ -90,7 +90,12 @@ class Input:
         return metriche_selezionate
     
     def Gestione_valori_mancanti(self):
+        '''
+        Questa funzione permette all'utente di selezionare la gestione dei valori mancanti.
+        Restituisce una stringa che rappresenta la scelta dell'utente.
+        '''
         print("Selezionare la gestione dei valori mancanti:\n1. Eliminazione\n2. Media\n3. Mediana\n4. Moda")
+        # Dizionario che associa i numeri alle metriche
         associazione = {
             1: 'Eliminazione',
             2: 'Media',
@@ -99,6 +104,7 @@ class Input:
         }
         while True:
             scelta = int(input("Inserire il numero corrispondete alla gestione dei valori mancanti: "))
+            # Verifica che i numeri siano compresi tra 1 e 4
             if 0 < scelta < 5:
                 gestione_selezionata = associazione[scelta]
                 break
