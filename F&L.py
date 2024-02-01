@@ -1,4 +1,4 @@
-from DFImputer import dfImputer
+from DFInputer import dfInputer
 from ReaderFactory import readerfactory
 
 class DataSplitter:

@@ -1,8 +1,11 @@
+from ReaderFactory import readerfactory
 
-class DataframeImputer:
+class dfInputer:
     '''
     Classe dataframeimputer che ha il compito di riempire i valori mancanti in un dataframe 
     '''
+    def __init__(self, df):
+        self.df = df
 
     def impute_missing_values(self, df):
         '''
