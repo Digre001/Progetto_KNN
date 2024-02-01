@@ -19,6 +19,8 @@ class Input:
         self.N_esperimenti = None
         # Metriche da valutare nel modello
         self.Metriche = None
+        # Gestione dei valori mancanti in modo appropiato
+        self.Gestione = None 
 
     def user_input(self):
         '''
