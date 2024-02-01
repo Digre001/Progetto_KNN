@@ -1,9 +1,8 @@
 import pandas as pd
-from ReaderFactory import Reader
 
-class ReaderCSV(Reader):
+class ReaderCSV:
     '''
-    Implementazione della classe concreta ReaderCSV, una classe figlia della clsasse astratta Reader.
+    Implementazione della classe ReaderCSV.
     il suo unico compito è leggere file CSV, trasformali in Dataframe e restituirli pronti per il preprocessing.
     '''
 
