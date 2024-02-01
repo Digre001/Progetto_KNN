@@ -5,15 +5,10 @@ class DataSplitter:
     def __init__(self, df, label_column_name):
         self.df = df
         self.label_column_name = label_column_name
-'''
-dataset['colonna_numerica'] = dataset['colonna_numerica'].fillna(dataset['colonna_numerica'].mean())
+ 
+    def split(self):
+        features = self.df.drop(self.label_column_name, axis=1)
+        labels = self.df[self.label_column_name]
+        return features, labels
 
-dataset = dataset.dropna(subset=['colonna_interessata'])
-
-dataset['colonna_manca'] = dataset['colonna'].isnull()
-
-X = dataset.drop('Class', axis=1) 
-y = dataset['Class']  
-
-'''
 
