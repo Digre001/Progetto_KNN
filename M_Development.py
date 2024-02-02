@@ -27,8 +27,10 @@ class Knn:
         for i in X:
             # Calcola le distanze euclidee tra l'elemento i e tutti i punti di addestramento in X_train
             distanza = [self.distanza_euclidea(i, j) for j in self.X_train]
+            # Ottieni il valore di k da input
+            k = self.input.k
             # Ottieni gli indici ordinati delle distanze più basse (i k vicini più prossimi)
-            k_ordinati = np.argsort(distanza)[:self.k]
+            k_ordinati = np.argsort(distanza)[:k]
             # Ottieni i target corrispondenti agli indici ordinati
             k_vicini = [self.Y_train[a] for a in k_ordinati]
             # Conta le occorrenze di ciascun target tra i k vicini
