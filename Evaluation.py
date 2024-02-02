@@ -34,3 +34,6 @@ class Evaluation:
 
     pass
 
+
+    def valutazione_holdout(self):
+        pass
