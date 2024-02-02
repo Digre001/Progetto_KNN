@@ -26,7 +26,7 @@ class Split_data:
         y_test: dati per testare il modello finale confrpntandolo con le uscite che mi restituisce il mio modello creato
         '''
 
-    def Split_Holdout(self, features: pd.DataFrame, target: pd.Series, train_size: int):
+    def Split_Holdout(self):
         # Prendo i dati per il training secondo una percentuale specificata in input
         X_train = self.features.sample(frac=self.train_size)
         # Prendo i dati per il test. Sono tutti i dati che non sono stati presi per il training
