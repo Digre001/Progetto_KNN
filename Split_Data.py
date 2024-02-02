@@ -3,22 +3,11 @@ import pandas as pd
 
 class Split_data:
 
-    def __init__(self, features: pd.DataFrame, target: pd.Series, train_size: int, N_esperimenti: int, k,
-                 metriche_scelte: list):
+    def __init__(self, features: pd.DataFrame, target: pd.Series, train_size: int, N_esperimenti: int, k):
         self.features = features
         self.target = target
         self.train_size = train_size
         self.N_esperimenti=N_esperimenti
-
-        def __init__(self, features: pd.DataFrame, target: pd.Series, train_size: int, N_esperimenti: int, k,
-                     metriche_scelte: list):
-            self.features = features
-            self.target = target
-            self.train_size = train_size
-            self.N_esperimenti = N_esperimenti
-            self.metriche_scelte = metriche_scelte
-            self.k = k
-        self.k = k
 
 
 
