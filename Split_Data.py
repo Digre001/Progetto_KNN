@@ -73,6 +73,30 @@ class Split_data:
         if self.N_esperimenti is not None and self.N_esperimenti < len(Combinazioni):
             Combinazioni = Combinazioni[:self.N_esperimenti]
 
+        # Per ogni combinazione creo set di training e set di test
+        for indici_test in Combinazioni:  # in ogni iterazione del ciclo, indici_test assume il valore di una diversa combinazione di indici ottenuta da Combinazioni
+
+            # gli indici per il set di train vengono calcolati escludendo gli indici presenti in indici_test
+            indici_train = [i for i in range(n) if i not in indici_test]
+
+            # Crea le coppie di training e test set:
+            # qui prendo gli indici corrispondendti a quelli per il train e vado a prendere i valori con questi stessi indici nel
+            # data frame delle featurs e li metto nella colonna uno della variabile train_set e poi allo stesso modo
+            # prendo gli stessi valori dal frame dei target con gli stessi indici degli indici_train e li metto nella seconda
+            # colonna del train_set
+            train_set = (self.features.iloc[indici_train], self.target.iloc[indici_train])
+
+            # faccio allo stesso modo sopra soltanto usando gli indici_test
+            test_set = (self.features.iloc[indici_test], self.target.iloc[indici_test])
+
+            # qui aggiungo i valori ottenuti dentro le variabili X_train, Y_train ecc...
+            X_TRAIN.append(train_set[0])
+            Y_TRAIN.append(train_set[1])
+            X_TEST.append(test_set[0])
+            Y_TEST.append(test_set[1])
+
+        return X_TRAIN, Y_TRAIN, X_TEST, Y_TEST
+
 
 '''
 questo metodo serve per calcolare tutte le combinazioni possibili dato il numero di gruppi
