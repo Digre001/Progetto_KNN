@@ -24,14 +24,15 @@ Richieste del Data Preprocessing:
 1. Dividere il dataset in features (variabili indipendenti) e target label (classe).
 
 File Python utilizzati in questa sezione: ReaderCSV.py, ReaderFactory.py, DFInputer.py, F&L.py.
-Per poter testare singolarmente questa parte del progetto è necessario apportare delle modifiche al file F&L.py:
+Per poter testare singolarmente questa parte del progetto è necessario apportare delle modifiche al file F&L.py:  
 - Eliminare l'import statement del file input alla riga 3 del codice: `from input import Input`, e di conseguenza tutte le righe associate a questa riga, come la riga 9 `self.input = Input()` e la riga 26 `method = self.input.Gestione`.
-- Nella riga 28, togliere method e inserire tra virgolette una delle seguenti opzioni (drop, mean, median, mode). Ad esempio, `df_ready = dfInputer(df).handle_missing_values("mean")`.
+- Nella riga 28, togliere method e inserire tra virgolette una delle seguenti opzioni (drop, mean, median, mode). Ad esempio,   `df_ready = dfInputer(df).handle_missing_values("mean")`.
 - Aggiungere alla fine del codice le seguenti righe:
     - `a = DataSplitter('test.csv')`
     - `features, labels = a.process_data()`
     - `print("Features:\n", features)`
-    - `print("Labels:\n", labels)`
+    - `print("Labels:\n", labels)`  
+
 Dopo aver apportato le seguenti modifiche segliere il modo più appropiato per gestire i valori mancanti e runnare il codice, la riga 3 e 5 del file test.csv contengono valori mancanti.
 
 ### Knn 
@@ -40,5 +41,20 @@ Richieste per lo sviluppo del modello:
 1. Per ogni campione dell'insieme di test, calcolare la distanza da tutti i campioni del set di training e identificare i k campioni più vicini, utilizzando la distanza euclidea.
 1. Classificare ogni campione dell'insieme di test scegliendo l'etichetta più comune tra i k vicini. In caso di parità tra le etichette, scegliere in modo casuale.
 
-Unico file python utilizato per questa sezione: M_Development.py
-Per poter testare singolarmente questa parte del progetto è necessario apportare delle modifiche al file F&L.py:
+Unico file python utilizzato per questa sezione: `M_Development.py`.
+Per testare singolarmente questa parte del progetto, è necessario apportare alcune modifiche al file `M_Development.py`:
+
+- Eliminare l'istruzione di importazione del file input alla riga 2 del codice: `from input import Input`, e di conseguenza tutte le righe associate a questa riga, come la riga 17 `self.input = Input()` e la riga 31 `k = self.input.k`.
+- Sostituire `self.input = Input()` della riga 17 con `self.k = k`.
+- Modificare `def __init__(self):` della riga 16 con `def __init__(self, k):`.
+- Modificare `k_ordinati = np.argsort(distanza)[:k]` della riga 33 con `k_ordinati = np.argsort(distanza)[:self.k]`.
+- Aggiungere alla fine del codice le seguenti righe:
+    - `X_train = np.array([[1, 2], [2, 3], [3, 4], [4, 5]])`
+    - `Y_train = np.array(['A', 'A', 'B', 'B'])`
+    - `X_test = np.array([[1, 1], [3, 3]])`
+    - `knn_classifier = Knn(k=2)`
+    - `knn_classifier.training(X_train, Y_train)`
+    - `predictions = knn_classifier.predizione(X_test)`
+    - `print("Previsioni:", predictions)`
+
+Dopo aver apportato queste modifiche, eseguire il codice che restituirà due possibili risultati a causa della scelta casuale in caso di parità di vicini.
