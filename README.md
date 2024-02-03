@@ -16,7 +16,8 @@ L'obiettivo è consentire agli utenti di caricare un dataset, gestire i valori m
 Gli input sono soggetti a dei controlli, (es. k deve essere un numero intero in caso contrario sara richiesto all'utente di reinserire un nuovo valore), tutti a parte p che richiede la consapevolezza dell' utente.
 
 ## Valutazione Individuale delle Sezioni di codice 
-In questa sezione viene riportato come andare a testare singole parti del progetto in particolare la parte di Preprocessing e di Knn (sviluppo del modello)
+In questa sezione viene riportato come andare a testare singole parti del progetto in particolare la parte di Preprocessing e di Knn (sviluppo del modello)  
+I file con le modifiche descritte in seguito si trovano nei branch es: `git checkout Preprocessing` porta al branch con il file F&L.py pronto per i test
 
 ### Preprocessing 
 Richieste del Data Preprocessing:
@@ -34,7 +35,7 @@ Per poter testare singolarmente questa parte del progetto è necessario apportar
     - `print("Features:\n", features)`
     - `print("Labels:\n", labels)`  
 
-Dopo aver apportato le seguenti modifiche segliere il modo più appropiato per gestire i valori mancanti e runnare il codice, la riga 3 e 5 del file test.csv contengono valori mancanti.
+Dopo aver apportato le seguenti modifiche segliere il modo più appropiato per gestire i valori mancanti e runnare il codice, la riga 3 e 5 del file test.csv contengono valori mancanti.  
 
 ### Knn 
 Richieste per lo sviluppo del modello:
