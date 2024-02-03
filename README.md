@@ -28,10 +28,11 @@ Per poter testare singolarmente questa parte del progetto è necessario apportar
 - Eliminare l'import statement del file input alla riga 3 del codice: `from input import Input`, e di conseguenza tutte le righe associate a questa riga, come la riga 9 `self.input = Input()` e la riga 26 `method = self.input.Gestione`.
 - Nella riga 28, togliere method e inserire tra virgolette una delle seguenti opzioni (drop, mean, median, mode). Ad esempio, `df_ready = dfInputer(df).handle_missing_values("mean")`.
 - Aggiungere alla fine del codice le seguenti righe:
-    - `a = DataSplitter('leggi.csv')`
+    - `a = DataSplitter('test.csv')`
     - `features, labels = a.process_data()`
     - `print("Features:\n", features)`
     - `print("Labels:\n", labels)`
+Dopo aver apportato le seguenti modifiche segliere il modo più appropiato per gestire i valori mancanti e runnare il codice, la riga 3 e 5 del file test.csv contengono valori mancanti.
 
 ### Knn 
 Richieste per lo sviluppo del modello:
