@@ -59,5 +59,6 @@ Per testare singolarmente questa parte del progetto, è necessario apportare alc
     - `predictions = knn_classifier.predizione(X_test)`
     - `print("Previsioni:", predictions)`
 
-Dopo aver apportato queste modifiche, eseguire il codice che restituirà due possibili risultati a causa della scelta casuale in caso di parità di vicini.
+Dopo aver apportato queste modifiche, eseguire il codice che restituirà due possibili risultati a causa della scelta casuale in caso di parità di vicini.  
+Nel branch Knn è presente un grafico che mostra i risultati dei test effettuato
 
