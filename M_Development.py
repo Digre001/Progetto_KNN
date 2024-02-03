@@ -1,5 +1,4 @@
 import numpy as np # import della libreria numpy 
-from input import Input
 import random
 
 class Knn:
@@ -12,9 +11,9 @@ class Knn:
         - training(self, X, Y): Metodo per addestrare il modello KNN con dati di addestramento.
         - predizione(self, X): Metodo per fare previsioni su nuovi dati basandosi sui vicini più prossimi.
         - distanza_euclidea(self, x_1, x_2): Metodo per calcolare la distanza euclidea tra due vettori.
-'''
-    def __init__(self):
-        self.input = Input()
+    '''
+    def __init__(self, k):
+        self.k = k
 
     def training(self, X, Y):
         self.X_train = X
@@ -27,10 +26,8 @@ class Knn:
         for i in X:
             # Calcola le distanze euclidee tra l'elemento i e tutti i punti di addestramento in X_train
             distanza = [self.distanza_euclidea(i, j) for j in self.X_train]
-            # Ottieni il valore di k da input
-            k = self.input.k
             # Ottieni gli indici ordinati delle distanze più basse (i k vicini più prossimi)
-            k_ordinati = np.argsort(distanza)[:k]
+            k_ordinati = np.argsort(distanza)[:self.k]
             # Ottieni i target corrispondenti agli indici ordinati
             k_vicini = [self.Y_train[a] for a in k_ordinati]
             # Conta le occorrenze di ciascun target tra i k vicini
@@ -58,4 +55,14 @@ class Knn:
         # Il calcolo avviene tramite l'ausilio della libreria numpy
         dist = np.sqrt(np.sum((x_1-x_2)**2)) 
         return dist 
+
+# Aggiunte le seguenti righe alla fine del codice
+X_train = np.array([[1, 2], [2, 3], [3, 4], [4, 5]])
+Y_train = np.array(['A', 'A', 'B', 'B'])
+X_test = np.array([[1, 1], [3, 3]])
+knn_classifier = Knn(k=2)
+knn_classifier.training(X_train, Y_train)
+predictions = knn_classifier.predizione(X_test)
+print("Previsioni:", predictions)
+
 
