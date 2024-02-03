@@ -42,3 +42,6 @@ class Evaluation:
         # richiamo il metodo che va a splittare i dati in dati di train e dati di test
         X_train, Y_train, x_test, y_test = self.Split.Split_Holdout()
         
+
+    def valutazione_leave_p_out(self):
+        pass
