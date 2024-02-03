@@ -69,18 +69,29 @@ class Split_data:
         Combinazioni = tutte_le_combinazioni(indici_totali, p)
 
 
-def tutte_le_combinazioni(indici, k, current=[]):
+'''
+questo metodo serve per calcolare tutte le combinazioni possibili dato il numero di gruppi
+fornito dall'utente con il valore p, che in questo metodo verrà nominato k. Questo processo viene
+effetutato grazie alla ricorsione del metodo che verrà chiamto esso stesso nel suo metodo.
+(metodo ricorsivo).
+
+Indici: è la variabile della lunghezza delle righe del Dataset delle features
+k: lunghezza delle combinazioni desiderata
+current=[]: vettore vuoto che verrà aggiornato ogni qualvolta rientro ovvero il vettore ricorsivo che non viene 
+    specificato all'esterno
+'''
+def tutte_le_combinazioni(indici, k, indici_correnti=[]):
     # Questa condizione verifica se la lunghezza desiderata delle combinazioni è quella voluta (p). Quando k è zero,
     # significa che abbiamo raggiunto la lunghezza desiderata della combinazione, quindi restituiamo la lista contenente
     # la combinazione corrente. (ricordiamo è la combinazione degli indici del DataFrame
     if k == 0:
-        return [current]
+        return [indici_correnti]
 
     combinazioni = []
-    for i, index in enumerate(indici):
+    for i, indici_interni in enumerate(indici):
         # creo una nuova variabile con gli indici rimanenti ovvero scarto l'indice che considero alla posizione i
         remaining_indices = indici[i + 1:]
         # inserisco dentro combinations la combinazioni di indice quando k arriverà a 0
-        combinazioni.extend(tutte_le_combinazioni(remaining_indices, k - 1, current + [index]))
+        combinazioni.extend(tutte_le_combinazioni(remaining_indices, k - 1, indici_correnti + [indici_interni]))
 
     return combinazioni
