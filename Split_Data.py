@@ -70,5 +70,17 @@ class Split_data:
 
 
 def tutte_le_combinazioni(indici, k, current=[]):
+    # Questa condizione verifica se la lunghezza desiderata delle combinazioni è quella voluta (p). Quando k è zero,
+    # significa che abbiamo raggiunto la lunghezza desiderata della combinazione, quindi restituiamo la lista contenente
+    # la combinazione corrente. (ricordiamo è la combinazione degli indici del DataFrame
+    if k == 0:
+        return [current]
 
-        pass
+    combinazioni = []
+    for i, index in enumerate(indici):
+        # creo una nuova variabile con gli indici rimanenti ovvero scarto l'indice che considero alla posizione i
+        remaining_indices = indici[i + 1:]
+        # inserisco dentro combinations la combinazioni di indice quando k arriverà a 0
+        combinazioni.extend(tutte_le_combinazioni(remaining_indices, k - 1, current + [index]))
+
+    return combinazioni
