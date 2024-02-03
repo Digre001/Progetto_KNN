@@ -51,4 +51,24 @@ class Split_data:
 
         return X_train, Y_train, x_test, y_test
 
-    pass
+
+
+
+
+
+    def Slpit_leave_p_out(self):
+        # creo in n il numero di righe del DataFrame delle features e in m le colonne.
+        n, m = self.features.shape[0], self.features.shape[1]
+
+        # Inizializzo le variabili di output
+        X_TRAIN, Y_TRAIN, X_TEST, Y_TEST = [], [], [], []
+
+        # Voglio calcolare tutte le combinazioni degli indici senza duplicati in modo tale poi da costruire i set
+        #di train e i set di test
+        indici_totali = list(range(n))
+        Combinazioni = tutte_le_combinazioni(indici_totali, p)
+
+
+def tutte_le_combinazioni(indici, k, current=[]):
+
+        pass
