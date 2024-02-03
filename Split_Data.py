@@ -68,10 +68,10 @@ class Split_data:
         # di train e i set di test
         indici_totali = list(range(n))
         Combinazioni = tutte_le_combinazioni(indici_totali, self.p)
-        
+
         # Limita il numero di combinazioni se specificato
         if self.N_esperimenti is not None and self.N_esperimenti < len(Combinazioni):
-            Combinazioni = tutte_le_combinazioni[:self.N_esperimenti]
+            Combinazioni = Combinazioni[:self.N_esperimenti]
 
 
 '''
