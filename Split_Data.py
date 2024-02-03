@@ -9,11 +9,12 @@ class Split_data:
         train_size: percentuale di dati che verranno utilizzati per il metodo di holdout
         N_esperimenti: numero di esperimenti da fare per il leavePout corss validation
         '''
-    def __init__(self, features: pd.DataFrame, target: pd.Series, train_size: int, N_esperimenti: int, k):
+    def __init__(self, features: pd.DataFrame, target: pd.Series, train_size: int, N_esperimenti: int, p: int):
         self.features = features
         self.target = target
         self.train_size = train_size
         self.N_esperimenti=N_esperimenti
+        self.p=p
 
 
     '''
@@ -64,9 +65,13 @@ class Split_data:
         X_TRAIN, Y_TRAIN, X_TEST, Y_TEST = [], [], [], []
 
         # Voglio calcolare tutte le combinazioni degli indici senza duplicati in modo tale poi da costruire i set
-        #di train e i set di test
+        # di train e i set di test
         indici_totali = list(range(n))
-        Combinazioni = tutte_le_combinazioni(indici_totali, p)
+        Combinazioni = tutte_le_combinazioni(indici_totali, self.p)
+        
+        # Limita il numero di combinazioni se specificato
+        if self.N_esperimenti is not None and self.N_esperimenti < len(Combinazioni):
+            Combinazioni = tutte_le_combinazioni[:self.N_esperimenti]
 
 
 '''
