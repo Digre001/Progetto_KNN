@@ -19,6 +19,10 @@ class Split_data:
     '''
         I valori che mi servono e che quindi voglio riutilizzare sono questi:
         (tramite return li inserisco nella variabile Split_Holdout)
+        
+        X_train_indices: con questo mi sto campionando una frazione tramite (train_size) degli indici del DataFrame features
+            in questo caso utilizzo .index per restituirmi gli indici associati alle righe campionate in modo tale da 
+            poter poi utilizzare le stesse righe associate alla loro target label. 
 
         X_train: dati per addestrare il modello
         Y_train: dati per addestrare il modello (risultato che conosco)
@@ -27,15 +31,23 @@ class Split_data:
         '''
 
     def Split_Holdout(self):
-        # Prendo i dati per il training secondo una percentuale specificata in input
-        X_train = self.features.sample(frac=self.train_size)
+        # Prendo gli indici dei dati per il training secondo una percentuale specificata in input
+        X_train_indices = self.features.sample(frac=self.train_size).index
+
+        #Usando gli indici ottenuti sopra, seleziono le righe corrispondenti dal DataFrame originale delle features
+        X_train = self.features.loc(X_train_indices)
+
         # Prendo i dati per il test. Sono tutti i dati che non sono stati presi per il training
-        x_test = self.features.drop(X_train.index)
+        # questo lo faccio tramite drop rimuovendoi dal DataFrame le righe selezionate per il training
+        x_test = self.features.drop(X_train_indices)
 
         # Mi salvo le y di train corrispondenti alle x di train
-        Y_train = self.target.drop(x_test.index)
+        # selezionando i valori target corrispondenti algi indici delle righe selezionate per il training.
+        Y_train = self.target.loc(X_train_indices)
+
         # Mi salvo le y di test corrispondenti alle x di test
-        y_test = self.target.drop(X_train.index)
+        # rimuovendo dalla Series dei target gli indici delle righe corrispondenti a quelle selezionate per il training.
+        y_test = self.target.drop(X_train_indices)
 
         return X_train, Y_train, x_test, y_test
 
