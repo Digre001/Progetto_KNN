@@ -2,6 +2,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from Split_Data import Split_data
 
 class Evaluation:
     '''
@@ -23,17 +24,21 @@ class Evaluation:
            lista che contiene le metriche scelte dall'utente
 
        '''
-    def __init__(self, features: pd.DataFrame, target_lable: pd.Series, train_size: int, N_esperimenti: int, k,
-                 metriche_scelte: list):
+    def __init__(self, features: pd.DataFrame, target_lable: pd.Series, train_size: int, N_esperimenti: int, K, metriche_scelte: list):
         self.features = features
         self.target = target_lable
         self.train_size = train_size
         self.N_esperimenti = N_esperimenti
         self.metriche_scelte = metriche_scelte
-        self.k = k
+        self.K = K
+
+        #creo istanza per richiamare la classe Split_Data
+        self.Split = Split_data(features, target_lable, train_size, N_esperimenti,K)
 
     pass
 
 
     def valutazione_holdout(self):
-        pass
+        # richiamo il metodo che va a splittare i dati in dati di train e dati di test
+        X_train, Y_train, x_test, y_test = self.Split.Split_Holdout()
+        
