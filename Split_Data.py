@@ -52,11 +52,19 @@ class Split_data:
 
         return X_train, Y_train, x_test, y_test
 
+    '''
+           Questo metodo serve per splittare i dati nel metodo leave_p_out cross validation 
+           dove tramite p so quante features usare per il test e poi attraverso tutte le combinazioni 
+           degli indici del DataFrame si possiamo associare per ogni indice delle features a quelle target 
+           andando a creare cosi tutte le combinazioni richieste tramite il valore N_esperimenti dato dall'utente
+           per fare il numero di esperimenti richiesti
 
-
-
-
-
+           --Return---
+           X_TRAIN: dati per addestrare il modello
+           Y_TRAIN: dati per addestrare il modello (risultato che conosco)
+           x_TEST: dati per tetare il modello
+           y_TEST: dati per testare il modello finale confrpntandolo con le uscite che mi restituisce il mio modello creato
+           '''
     def Slpit_leave_p_out(self):
         # creo in n il numero di righe del DataFrame delle features e in m le colonne.
         n, m = self.features.shape[0], self.features.shape[1]
