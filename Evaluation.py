@@ -45,6 +45,8 @@ class Evaluation:
 
         #Alleno il mio modello richiamado il Knn e passandogli i dati di train
         Modello_knn=M_development(X_train,Y_train)
+
+        #effettue le previsioni con il modello addestrato alla riga di codice sopra
         Previsioni=Modello_knn.predizione(x_test)
 
         
