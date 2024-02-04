@@ -49,6 +49,10 @@ class Evaluation:
         #effettue le previsioni con il modello addestrato alla riga di codice sopra
         Previsioni=Modello_knn.predizione(x_test)
 
+        #devo crere metodi per calcolare le metriche poi
+        #salvare le metriche
+        #plottare le metriche
+
         
 
     def valutazione_leave_p_out(self):
