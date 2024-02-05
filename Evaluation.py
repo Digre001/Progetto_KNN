@@ -41,7 +41,7 @@ class Evaluation:
 
     def valutazione_holdout(self):
         # richiamo il metodo che va a splittare i dati in dati di train e dati di test
-        X_train, Y_train, x_test, y_test = self.Split.Split_Holdout()
+        X_train, Y_train, x_test, y_test = self.Split.split_Holdout()
 
         #Alleno il mio modello richiamado il Knn e passandogli i dati di train
         Modello_knn=M_development(X_train,Y_train)

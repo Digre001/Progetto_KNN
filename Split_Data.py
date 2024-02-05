@@ -31,7 +31,7 @@ class Split_data:
         y_test: dati per testare il modello finale confrpntandolo con le uscite che mi restituisce il mio modello creato
         '''
 
-    def Split_Holdout(self):
+    def split_Holdout(self):
         # Prendo gli indici dei dati per il training secondo una percentuale specificata in input
         X_train_indices = self.features.sample(frac=self.train_size).index
 
@@ -65,7 +65,7 @@ class Split_data:
            x_TEST: dati per tetare il modello
            y_TEST: dati per testare il modello finale confrpntandolo con le uscite che mi restituisce il mio modello creato
            '''
-    def Slpit_leave_p_out(self):
+    def slpit_leave_p_out(self):
         # creo in n il numero di righe del DataFrame delle features e in m le colonne.
         n, m = self.features.shape[0], self.features.shape[1]
 
