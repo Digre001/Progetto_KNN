@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from Split_Data import Split_data
 from M_development import Knn
+from Metriche_L import Metriche
 
 class Evaluation:
     '''
@@ -49,7 +50,12 @@ class Evaluation:
         #effettue le previsioni con il modello addestrato alla riga di codice sopra
         Previsioni=Modello_knn.predizione(x_test)
 
-        #devo crere metodi per calcolare le metriche poi
+        #Istanzio il file per lavorare con le metriche
+        C_Metriche=Metriche(y_test,Previsioni,self.metriche_scelte)
+
+        #Calcolo le metriche
+        Accuracy_rate, Error_rate, Sensitivity, Specificity, Geometric_mean=C_Metriche.calcolo_matrix_metriche()
+
         #salvare le metriche
         #plottare le metriche
 
