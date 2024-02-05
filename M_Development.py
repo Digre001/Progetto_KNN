@@ -26,7 +26,7 @@ class Knn:
         # Per ogni elemento in X (i dati per i quali vogliamo fare previsioni)
         for i in X:
             # Calcola le distanze euclidee tra l'elemento i e tutti i punti di addestramento in X_train
-            distanza = [self.distanza_euclidea(i, j) for j in self.X_train]
+            distanza = [self.__distanza_euclidea(i, j) for j in self.X_train]
             # Ottieni il valore di k da input
             k = self.input.k
             # Ottieni gli indici ordinati delle distanze più basse (i k vicini più prossimi)
@@ -50,7 +50,7 @@ class Knn:
         return hope
     
     # Calcolo della distanza euclidea tramite una funzione
-    def distanza_euclidea(self,x_1, x_2):
+    def __distanza_euclidea(self,x_1, x_2):
         '''
         La distanza si calcola come la radice della somma dei quadrati delle differenze 
         La funzione restitursce la distanza calcolata 

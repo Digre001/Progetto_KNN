@@ -9,7 +9,7 @@ class DataSplitter:
         self.input = Input()
 
     # Metodo per suddividere il dataframe in features (caratteristiche) e label
-    def split(self, df, label_column_name):
+    def __split(self, df, label_column_name):
         # Estrai le features dal dataframe escludendo la colonna delle label
         features = df.drop(label_column_name, axis=1)
         # Estrai le label dal dataframe utilizzando solo la colonna delle label
@@ -29,4 +29,4 @@ class DataSplitter:
         # Ottiene il nome dell'ultima colonna del dataframe
         nome = df_ready.columns[-1]
         # Chiama il metodo split per suddividere il dataframe in features e labels utilizzando il nome ottenuto come colonna delle label
-        return self.split(df_ready, nome)
+        return self.__split(df_ready, nome)
