@@ -56,7 +56,9 @@ class Evaluation:
         #Calcolo le metriche
         Accuracy_rate, Error_rate, Sensitivity, Specificity, Geometric_mean=C_Metriche.calcolo_matrix_metriche()
 
-        #salvare le metriche
+        #Salvo le metriche in un file .txt
+        C_Metriche.salvare_metriche(Accuracy_rate, Error_rate, Sensitivity, Specificity, Geometric_mean)
+        
         #plottare le metriche
 
         
