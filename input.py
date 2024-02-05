@@ -1,4 +1,4 @@
-from selezione_input import selection
+from selezione_input import Selection
 
 class Input:
     '''
@@ -34,8 +34,8 @@ class Input:
         - Metriche: Richiama una funzione per la selezione delle metriche.
         '''
         # Richiama il metodo Gestione_valori_mancanti per la selezione della gestione dei valori mancanti
-        selezione = selection()
-        self.Gestione = selezione.Gestione_valori_mancanti()
+        selezione = Selection()
+        self.Gestione = selezione.gestione_valori_mancanti()
         self.k = int(input("Inserire il numero di vicini da studiare nel Knn (k): "))
         uscita=False
         while not uscita:
@@ -58,7 +58,7 @@ class Input:
             else:
                 print ("Errore: il modello di valutazione non è adatto (Holdout o Leave-p-out Cross Validation). Riprovare")
         # Richiama il metodo Metriche per la selezione delle metriche (da implementare, considerando una scelta multipla)
-        self.Metriche=selezione.Selzione_metriche() 
+        self.Metriche=selezione.selzione_metriche() 
         return {
             'Gestione': self.Gestione,
             'k': self.k,

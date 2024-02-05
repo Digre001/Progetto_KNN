@@ -1,6 +1,6 @@
-from ReaderCSV import readerCSV
+from readerCSV import ReaderCSV
 # classe factory per creare oggetti reader in base all'estensione del file 
-class readerfactory:
+class Readerfactory:
 
     @staticmethod # utilizzo del metodo statico 
     def create_reader(filename):# Definisce un metodo statico chiamato create_reader che accetta un parametro chiamato filename
@@ -11,7 +11,7 @@ class readerfactory:
         '''
       
         if filename.endswith('.csv'):
-            return readerCSV()
+            return ReaderCSV()
         else:
             raise ValueError("invalid file type")
         

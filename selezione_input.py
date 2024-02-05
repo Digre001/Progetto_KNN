@@ -1,10 +1,10 @@
 
-class selection:
+class Selection:
 
     def __init__(self):
         pass
 
-    def Selzione_metriche(self):
+    def selzione_metriche(self):
         '''
         Questa funzione permette all'utente di selezionare le metriche di valutazione.
         Restituisce una lista di metriche associate ai numeri inseriti dall'utente.
@@ -30,7 +30,7 @@ class selection:
                 print("Errore: inserire un valore valido. Riprova.")
         return metriche_selezionate
     
-    def Gestione_valori_mancanti(self):
+    def gestione_valori_mancanti(self):
         '''
         Questa funzione permette all'utente di selezionare la gestione dei valori mancanti.
         Restituisce una stringa che rappresenta la scelta dell'utente.

@@ -1,6 +1,6 @@
 import pandas as pd
 
-class readerCSV:
+class ReaderCSV:
     '''
     Implementazione della classe ReaderCSV.
     il suo unico compito è leggere file CSV, trasformali in Dataframe e restituirli pronti per il preprocessing.

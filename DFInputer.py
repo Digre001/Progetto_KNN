@@ -1,5 +1,5 @@
 
-class dfInputer:
+class DfInputer:
     '''
     Classe dataframeimputer che ha il compito di riempire i valori mancanti in un dataframe 
     '''

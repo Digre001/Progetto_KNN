@@ -1,5 +1,5 @@
-from DFInputer import dfInputer
-from ReaderFactory import readerfactory
+from DFInputer import DfInputer
+from ReaderFactory import Readerfactory
 from input import Input
 
 class DataSplitter:
@@ -19,13 +19,13 @@ class DataSplitter:
     
     def process_data(self):
         # richiamo della metodo create_readr della classe readerfactory
-        reader = readerfactory.create_reader(self.file_name)
+        reader = Readerfactory.create_reader(self.file_name)
         # Utilizza reader per analizzare il file e ottenere un dataframe
         df = reader.parse(self.file_name)
         # Ottiene il metodo per gestire i valori mancanti dal file di input
         method = self.input.Gestione
         # Crea un'istanza di dfInputer con il dataframe ottenuto e utilizza il metodo specificato per gestire i valori mancanti
-        df_ready = dfInputer(df).handle_missing_values(method)
+        df_ready = DfInputer(df).handle_missing_values(method)
         # Ottiene il nome dell'ultima colonna del dataframe
         nome = df_ready.columns[-1]
         # Chiama il metodo split per suddividere il dataframe in features e labels utilizzando il nome ottenuto come colonna delle label
