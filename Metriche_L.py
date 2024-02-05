@@ -7,6 +7,22 @@ class Metriche:
         self.y_test=y_test
         self.previsioni=previsioni
 
+
+
+
+    '''
+            con questo metodo si vuole calcolare prima i valori della confuzion matrix secondo le rispettive norme del:
+            vero positivo, vero negativo, falso positivo ed infine falso negativo; per andare poi, a calcolare, 
+            attraverso questi vaolri, le metriche richieste che saranno poi specificate dall'utente. 
+
+            le metriche calcolate saranno:
+
+           - Accuracy Rate
+           - Error Rate
+           - Sensitivity
+           - SpeciCicity
+           - Geometric Mean
+           '''
     def calcolo_matrix_metriche(self):
         # calcolo la confusion Matrix:
 
