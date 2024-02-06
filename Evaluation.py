@@ -113,3 +113,12 @@ class Evaluation:
         Sensitivity_media = np.mean(Sensitivity_Lista)
         Specificity_media = np.mean(Specificity_Lista)
         Geometric_mean_media = np.mean(Geometric_mean_Lista)
+
+        # richiamo il metodo che va a salvare le metriche calcolate, nel file Metriche.txt
+        Metriche.salvare_metriche(Accuracy_rate_media, Error_rate_media, Sensitivity_media, Specificity_media,Geometric_mean_media)
+
+        # richiamo il metodo che va a plottare l'andamento le metriche calcolate
+        Metriche.plot_metriche_leave_p_out(Accuracy_rate_Lista, Error_rate_Lista, Sensitivity_Lista, Specificity_Lista,Geometric_mean_Lista)
+
+        # richiamo il metodo che va a plottare la media delle metriche calcolata
+        Metriche.plot_metriche_holdout_e_media(Accuracy_rate_Lista, Error_rate_Lista, Sensitivity_Lista, Specificity_Lista, Geometric_mean_Lista)

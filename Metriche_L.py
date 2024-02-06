@@ -151,37 +151,36 @@ class Metriche:
 
             La rappresentazione avviene tramite la libreria matplotlib.
             '''
-        def plot_metriche_leave_p_out(self, Accuracy_rate: list, Error_rate: list, Sensitivity: list, Specificity: list,
-                                      Geometric_mean: list):
-            # Imposto la dimensione del grafico
-            plt.figure(figsize=(10, 5))
+    def plot_metriche_leave_p_out(self, Accuracy_rate: list, Error_rate: list, Sensitivity: list, Specificity: list,Geometric_mean: list):
+        # Imposto la dimensione del grafico
+        plt.figure(figsize=(10, 5))
 
-            # Con le seguenti operazioni plotto le metriche richieste
-            if 1 in self.metriche_scelte:
-                plt.plot(Accuracy_rate, marker='o', linestyle='solid', linewidth=2, markersize=5, color='blue',
-                         label='Accuracy Rate')
+        # Con le seguenti operazioni plotto le metriche richieste
+        if 1 in self.metriche_scelte:
+            plt.plot(Accuracy_rate, marker='o', linestyle='solid', linewidth=2, markersize=5, color='blue',
+                     label='Accuracy Rate')
 
-            if 2 in self.metriche_scelte:
-                plt.plot(Error_rate, marker='o', linestyle='solid', linewidth=2, markersize=5, color='green',
-                         label='Error Rate')
+        if 2 in self.metriche_scelte:
+            plt.plot(Error_rate, marker='o', linestyle='solid', linewidth=2, markersize=5, color='green',
+                     label='Error Rate')
 
-            if 3 in self.metriche_scelte:
-                plt.plot(Sensitivity, marker='o', linestyle='solid', linewidth=2, markersize=5, color='red',
-                         label='Sensitivity')
+        if 3 in self.metriche_scelte:
+            plt.plot(Sensitivity, marker='o', linestyle='solid', linewidth=2, markersize=5, color='red',
+                     label='Sensitivity')
 
-            if 4 in self.metriche_scelte:
-                plt.plot(Specificity, marker='o', linestyle='solid', linewidth=2, markersize=5, color='yellow',
-                         label='Specificity')
+        if 4 in self.metriche_scelte:
+            plt.plot(Specificity, marker='o', linestyle='solid', linewidth=2, markersize=5, color='yellow',
+                     label='Specificity')
 
-            if 5 in self.metriche_scelte:
-                plt.plot(Geometric_mean, marker='o', linestyle='solid', linewidth=2, markersize=5, color='orange',
-                         label='Geometric Mean')
+        if 5 in self.metriche_scelte:
+            plt.plot(Geometric_mean, marker='o', linestyle='solid', linewidth=2, markersize=5, color='orange',
+                     label='Geometric Mean')
 
-            plt.legend(loc='upper right')  # Imposto la posizione legenda nel grafico
-            plt.xlabel("Esperimenti")  # Imposto il nome dell'etichetta dell'asse x
-            plt.ylabel("Valori")  # Imposto il nome dell'etichetta dell'asse y
-            plt.title("Andamento delle metriche")  # Imposto il titolo del grafico
-            plt.tight_layout()  # Ottimizza la disposizione dei sottopannelli nel grafico per evitare sovrapposizioni
+        plt.legend(loc='upper right')  # Imposto la posizione legenda nel grafico
+        plt.xlabel("Esperimenti")  # Imposto il nome dell'etichetta dell'asse x
+        plt.ylabel("Valori")  # Imposto il nome dell'etichetta dell'asse y
+        plt.title("Andamento delle metriche")  # Imposto il titolo del grafico
+        plt.tight_layout()  # Ottimizza la disposizione dei sottopannelli nel grafico per evitare sovrapposizioni
 
-            # Mostro il grafico
-            plt.show()
+        # Mostro il grafico
+        plt.show()
