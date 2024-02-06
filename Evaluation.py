@@ -2,7 +2,7 @@
 import pandas as pd
 import numpy as np
 from Split_Data import Split_data
-from M_development import Knn
+from M_Development import Knn
 from Metriche_L import Metriche
 
 class Evaluation:
@@ -55,7 +55,7 @@ class Evaluation:
         X_train, Y_train, x_test, y_test = self.Split.split_Holdout()
 
         #Alleno il mio modello richiamado il Knn e passandogli i dati di train
-        Modello_knn=M_development(X_train,Y_train)
+        Modello_knn=Knn(X_train,Y_train)
 
         #effettue le previsioni con il modello addestrato alla riga di codice sopra
         Previsioni=Modello_knn.predizione(x_test)
@@ -101,7 +101,7 @@ class Evaluation:
         # il processo viene ripetuto N_esperimenti (K) volte decisi dall'utente
         for _ in range(self.N_esperimenti):
             # Alleno il modello fornendogli i dati di training
-            Modello_knn = M_development(X_train[_], Y_train[_])
+            Modello_knn = Knn(X_train[_], Y_train[_])
 
             # Effettuo la predizione con il modello allenato precedentemente
             Previsioni = Modello_knn.predizione(x_test[_])
