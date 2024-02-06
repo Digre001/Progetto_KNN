@@ -26,16 +26,16 @@ class Evaluation:
            lista che contiene le metriche scelte dall'utente
 
        '''
-    def __init__(self, features: pd.DataFrame, target_lable: pd.Series, train_size: int, N_esperimenti: int, K, metriche_scelte: list):
+    def __init__(self, features: pd.DataFrame, target_lable: pd.Series, train_size: int, N_esperimenti: int, p, metriche_scelte: list):
         self.features = features
         self.target = target_lable
         self.train_size = train_size
         self.N_esperimenti = N_esperimenti
         self.metriche_scelte = metriche_scelte
-        self.K = K
+        self.p = p
 
         #creo istanza per richiamare la classe Split_Data
-        self.Split = Split_data(features, target_lable, train_size, N_esperimenti,K)
+        self.Split = Split_data(features, target_lable, train_size, N_esperimenti,p)
 
     pass
 
