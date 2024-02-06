@@ -76,4 +76,40 @@ class Evaluation:
         
 
     def valutazione_leave_p_out(self):
-        pass
+        # Inizializzo le liste che conteranno i valori delle metriche calcolate per ogni iterazione
+        Accuracy_rate_Lista = []
+        Error_rate_Lista = []
+        Sensitivity_Lista = []
+        Specificity_Lista = []
+        Geometric_mean_Lista = []
+
+        # richiamo il metodo che va a splittare i dati in dati di train e dati di test
+        X_train, Y_train, x_test, y_test = self.Split.slpit_leave_p_out()
+
+        # il processo viene ripetuto N_esperimenti (K) volte decisi dall'utente
+        for _ in range(self.N_esperimenti):
+            # Alleno il modello fornendogli i dati di training
+            Modello_knn = M_development(X_train[_], Y_train[_])
+
+            # Effettuo la predizione con il modello allenato precedentemente
+            Previsioni = Modello_knn.predizione(x_test[_])
+
+            # Istanzio il file per lavorare con le metriche
+            C_Metriche = Metriche(y_test[_], Previsioni, self.metriche_scelte)
+
+            # richiamo il metodo che va a calcolare le metriche, passandogli i dati di test e le predizioni
+            Accuracy_rate, Error_rate, Sensitivity, Specificity, Geometric_mean = C_Metriche.calcolo_matrix_metriche()
+
+            # Aggiungo i valori delle metriche calcolate, per questo esperimento, nelle liste
+            Accuracy_rate_Lista.append(Accuracy_rate)
+            Error_rate_Lista.append(Error_rate)
+            Sensitivity_Lista.append(Sensitivity)
+            Specificity_Lista.append(Specificity)
+            Geometric_mean_Lista.append(Geometric_mean)
+
+        # Calcolo i valori medi per ogni metrica calcolata nei K esperimetni
+        Accuracy_rate_media = np.mean(Accuracy_rate_Lista)
+        Error_rate_media = np.mean(Error_rate_Lista)
+        Sensitivity_media = np.mean(Sensitivity_Lista)
+        Specificity_media = np.mean(Specificity_Lista)
+        Geometric_mean_media = np.mean(Geometric_mean_Lista)
