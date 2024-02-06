@@ -73,7 +73,20 @@ class Evaluation:
         #plottare le metriche
         C_Metriche.plot_metriche_holdout_e_media(Accuracy_rate, Error_rate, Sensitivity, Specificity, Geometric_mean)
 
-        
+    ''' 
+        Il processo di valutazione Leave_P_Out Cross Validation consiste in:
+
+        1. Specificare in input il numero di esperimenti (K) da effettuare (che corrisponderanno alle combinazioni da effettuare)
+        2. Specificare in input il numero di feature che si vuole usare per i test per i dati di train e test
+        3. Addestramento del modello: il modello viene addestrato quindi utilizzando X_train e Y_train
+        4. Valutazione delle performance: il modello addestrato viene quindi valutato utilizzando i dati di test (y_test). 
+            Le prestazione del modello vengono calcolate tramite diverse metriche scelte dall'utente
+        5. Iterazioni multiple: il processo viene ripetuto piu volte (K volte), con nuove suddivisioni casuali del dataset, 
+            per ottenere una stima più robusta della performance del modello. Infine le valutazioni multiple vengono aggregate 
+            per ottenere una misura comune delle prestazioni del modello.
+        6. Analisi dei risultati: si analizzano le metriche trovate per capire quanto il mio modello generalizza sui dati sconosciuti
+
+    '''
 
     def valutazione_leave_p_out(self):
         # Inizializzo le liste che conteranno i valori delle metriche calcolate per ogni iterazione
