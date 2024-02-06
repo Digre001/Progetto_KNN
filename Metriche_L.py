@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 class Metriche:
 
@@ -77,6 +78,24 @@ class Metriche:
 
 
 
+
+    '''
+       In questo metodo le metriche calcolate precedentemente vengono salvate su un file questo file
+       si chiamerà "Metriche.txt
+
+      Le variabili da passare a questo metodo sono quelle calcolate con il metodo calcolo_matrix_metriche
+      e sono:
+
+       Accuracy_rate: ovvero la percentuale di predizioni corrette rispetto al totale delle predizioni
+
+       Error_rate: ovvero la percentuale di predizioni errate rispetto al totale delle predizioni
+
+       Sensitivity: la capacità del modello di predirre correttamente i valori positivi
+
+       Specificity: la capacità del modello di predirre correttamente i valori negativi
+
+       Geometric_mean: la media che bilancia valori positivi e negativi
+       '''
     def salvare_metriche(self, Accuracy_rate, Error_rate, Sensitivity, Specificity, Geometric_mean):
         # Apro il file Metriche.txt
         with open('Calcolo_Metriche.txt', 'w') as file:
@@ -90,5 +109,79 @@ class Metriche:
         # Chiudo il file Metriche.txt
         file.close()  # Chiudo il file Metriche.txt
 
-    def plot_metriche(self):
-        pass
+
+
+    '''
+        In questo metodo vengono plottate le metriche per ogni esperimento dell'holdout perhcè ho solo un 
+        valore nella metrica e verrà rapressentato tramite un grafico a barre.
+        La rappresentazione avviene tramite la libreria matplotlib.
+
+        sarà usato anche per prottare la media delle metriche nel modello leave_p_out
+        '''
+    def plot_metriche_holdout_e_media(self, Accuracy_rate, Error_rate, Sensitivity, Specificity, Geometric_mean):
+        # questo vettore viene utilizzato per rappresentare le etichette sul grafico
+        etichette = ['Accuracy Rate', 'Error Rate', 'Sensitivity', 'Specificity', 'Geometric Mean']
+
+        # questo vettore invece viene utilizzato per rappresentare i valori del grafico corrispondenti alle etichette
+        valori = [Accuracy_rate, Error_rate, Sensitivity, Specificity, Geometric_mean]
+
+        # questo vettore viene utilizzato per determinare i colori delle varie barre del grafico
+        colori = ['blue', 'green', 'red', 'yellow', 'orange']
+
+        # Imposto la dimensione del grafico
+        plt.figure(figsize=(10, 5))
+
+        plt.bar(etichette, valori,
+                color=colori)  # Creo il grafico a barre. In x metto le etichette, in y metto i valori
+        plt.xlabel("Metriche")  # Imposto l'etichetta dell'asse x
+        plt.ylabel("Valori")  # Imposto l'etichetta dell'asse y
+        plt.title("Grafico delle metriche")  # Imposto il titolo del grafico
+        plt.show()  # Mostro il grafico
+
+
+
+
+        '''
+            In questo metodo vengono plottate le metriche per ogni esperimento del leave_p_out dato che gli esperimenti qui 
+            saranno maggiori andremo a plottare non più le metriche con il grafico a barre ma ogni valore della metrica 
+            cporisponderà ad un punto ovvero un esperimento cosi da vedere l'andamento delle metriche nei diversi esperimenti
+            ovvero cambiano i dati dei test e trianing.
+
+            verrà plottato anche il grafico a barre rispetto alla media delle metriche.
+
+            La rappresentazione avviene tramite la libreria matplotlib.
+            '''
+        def plot_metriche_leave_p_out(self, Accuracy_rate: list, Error_rate: list, Sensitivity: list, Specificity: list,
+                                      Geometric_mean: list):
+            # Imposto la dimensione del grafico
+            plt.figure(figsize=(10, 5))
+
+            # Con le seguenti operazioni plotto le metriche richieste
+            if 1 in self.metriche_scelte:
+                plt.plot(Accuracy_rate, marker='o', linestyle='solid', linewidth=2, markersize=5, color='blue',
+                         label='Accuracy Rate')
+
+            if 2 in self.metriche_scelte:
+                plt.plot(Error_rate, marker='o', linestyle='solid', linewidth=2, markersize=5, color='green',
+                         label='Error Rate')
+
+            if 3 in self.metriche_scelte:
+                plt.plot(Sensitivity, marker='o', linestyle='solid', linewidth=2, markersize=5, color='red',
+                         label='Sensitivity')
+
+            if 4 in self.metriche_scelte:
+                plt.plot(Specificity, marker='o', linestyle='solid', linewidth=2, markersize=5, color='yellow',
+                         label='Specificity')
+
+            if 5 in self.metriche_scelte:
+                plt.plot(Geometric_mean, marker='o', linestyle='solid', linewidth=2, markersize=5, color='orange',
+                         label='Geometric Mean')
+
+            plt.legend(loc='upper right')  # Imposto la posizione legenda nel grafico
+            plt.xlabel("Esperimenti")  # Imposto il nome dell'etichetta dell'asse x
+            plt.ylabel("Valori")  # Imposto il nome dell'etichetta dell'asse y
+            plt.title("Andamento delle metriche")  # Imposto il titolo del grafico
+            plt.tight_layout()  # Ottimizza la disposizione dei sottopannelli nel grafico per evitare sovrapposizioni
+
+            # Mostro il grafico
+            plt.show()
