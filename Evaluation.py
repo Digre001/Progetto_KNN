@@ -1,7 +1,6 @@
 # Importo le librerie necessarie
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 from Split_Data import Split_data
 from M_development import Knn
 from Metriche_L import Metriche
