@@ -36,7 +36,6 @@ class Evaluation:
         #creo istanza per richiamare la classe Split_Data
         self.Split = Split_data(features, target_lable, train_size, N_esperimenti,p)
 
-    pass
 
     '''
         La valutazione holdout consiste in:
