@@ -28,19 +28,19 @@ class Metriche:
         # calcolo la confusion Matrix:
 
         # Calcolo il valore True Negative della confusion matrix
-        vero_negativo = sum(1 for y, pred in zip(self.y_test, self.previsioni) if (y == pred and pred == 2))
-        # (zip mi serve per combinare gli elementi y_test e conforntarli con le previsioni e lìif quindi mi fa il conteggio
-        # in questo caso solo se y e pred coincidono con 2, quindi con 1 for y, ecc.. if ecc.. sto dicendo che mi genere un
+        vero_negativo = sum(1 for y, predizioni in zip(self.y_test, self.previsioni) if (y == predizioni and predizioni == 2))
+        # (zip mi serve per combinare gli elementi y_test e conforntarli con le previsioni e l'if quindi mi fa il conteggio
+        # in questo caso solo se y e predizioni  coincidono con 2, quindi con 1 for y, ecc.. if ecc.. sto dicendo che mi genere un
         # 1 ogni qualvolta la condizione if è soddisfatta e poi con sum sommo tutti questi uni).
 
         # Calcolo il valore True Positive della confusion matrix
-        vero_positivo = sum(1 for y, pred in zip(self.y_test, self.previsioni) if (y == pred and pred == 4))
+        vero_positivo = sum(1 for y, predizioni in zip(self.y_test, self.previsioni) if (y == predizioni and predizioni == 4))
 
         # Calcolo il valore False Positive della confusion matrix
-        falso_positivo = sum(1 for y, pred in zip(self.y_test, self.previsioni) if (y != pred and pred == 2))
+        falso_positivo = sum(1 for y, predizioni in zip(self.y_test, self.previsioni) if (y != predizioni and predizioni == 2))
 
         # Calcolo il valore False Negative della confusion matrix
-        falso_negativo = sum(1 for y, pred in zip(self.y_test, self.previsioni) if (y != pred and pred == 4))
+        falso_negativo = sum(1 for y, predizioni in zip(self.y_test, self.previsioni) if (y != predizioni and predizioni == 4))
 
         '''Calcolo effettivo delle metriche richieste mediante i valori della confusion matrix, precedentemente calcolati
                 '''
@@ -81,7 +81,7 @@ class Metriche:
 
     '''
        In questo metodo le metriche calcolate precedentemente vengono salvate su un file questo file
-       si chiamerà "Metriche.txt
+       si chiamerà "Metriche.xlsx" 
 
       Le variabili da passare a questo metodo sono quelle calcolate con il metodo calcolo_matrix_metriche
       e sono:
@@ -96,18 +96,19 @@ class Metriche:
 
        Geometric_mean: la media che bilancia valori positivi e negativi
        '''
-    def salvare_metriche(self, Accuracy_rate, Error_rate, Sensitivity, Specificity, Geometric_mean):
-        # Apro il file Metriche.txt
-        with open('Calcolo_Metriche.txt', 'w') as file:
-            # Ci scrivo dentro le metriche calcolate
-            file.write('Accuracy Rate: ' + str(Accuracy_rate) + '\n')
-            file.write('Error Rate: ' + str(Error_rate) + '\n')
-            file.write('Sensitivity: ' + str(Sensitivity) + '\n')
-            file.write('Specificity: ' + str(Specificity) + '\n')
-            file.write('Geometric Mean: ' + str(Geometric_mean) + '\n')
 
-        # Chiudo il file Metriche.txt
-        file.close()  # Chiudo il file Metriche.txt
+    def salvare_metriche(self, Accuracy_rate, Error_rate, Sensitivity, Specificity, Geometric_mean):
+        # Creo un DataFrame con le metriche
+        df = pd.DataFrame({
+            'Accuracy Rate': [Accuracy_rate],
+            'Error Rate': [Error_rate],
+            'Sensitivity': [Sensitivity],
+            'Specificity': [Specificity],
+            'Geometric Mean': [Geometric_mean]
+        })
+
+        # Esporto il DataFrame in un file Excel
+        df.to_excel('Calcolo_Metriche.xlsx', index=False)
 
 
 
@@ -131,8 +132,7 @@ class Metriche:
         # Imposto la dimensione del grafico
         plt.figure(figsize=(10, 5))
 
-        plt.bar(etichette, valori,
-                color=colori)  # Creo il grafico a barre. In x metto le etichette, in y metto i valori
+        plt.bar(etichette, valori, color=colori)  # Creo il grafico a barre. In x metto le etichette, in y metto i valori
         plt.xlabel("Metriche")  # Imposto l'etichetta dell'asse x
         plt.ylabel("Valori")  # Imposto l'etichetta dell'asse y
         plt.title("Grafico delle metriche")  # Imposto il titolo del grafico
@@ -161,15 +161,15 @@ class Metriche:
                      label='Accuracy Rate')
 
         if 2 in self.metriche_scelte:
-            plt.plot(Error_rate, marker='o', linestyle='solid', linewidth=2, markersize=5, color='green',
+            plt.plot(Error_rate, marker='o', linestyle='solid', linewidth=2, markersize=5, color='red',
                      label='Error Rate')
 
         if 3 in self.metriche_scelte:
-            plt.plot(Sensitivity, marker='o', linestyle='solid', linewidth=2, markersize=5, color='red',
+            plt.plot(Sensitivity, marker='o', linestyle='solid', linewidth=2, markersize=5, color='yellow',
                      label='Sensitivity')
 
         if 4 in self.metriche_scelte:
-            plt.plot(Specificity, marker='o', linestyle='solid', linewidth=2, markersize=5, color='yellow',
+            plt.plot(Specificity, marker='o', linestyle='solid', linewidth=2, markersize=5, color='green',
                      label='Specificity')
 
         if 5 in self.metriche_scelte:
