@@ -39,7 +39,18 @@ class Evaluation:
 
     pass
 
+    '''
+        La valutazione holdout consiste in:
+        1. Dividire i dati casualmente: viene specificata la percentuale di split in input (richiameremo spilt_data).
+        2. Addestrare il modello: tramite X_train ed Y_train.
+        3. Testare il modello: tramite x_test ed y_test.
+        4. Valutare le performance: tramite le y_test valutare il modello e poi tramite specifiche metriche
+            specificate dall'utente valutarne le prestazioni.
+        5. Analisi dei risultati: si analizzano le metriche trovate per capire quanto il mio modello 
+            generalizza sui dati sconosciuti.
+        6. plot delle metriche trtamite grafico a barre
 
+        '''
     def valutazione_holdout(self):
         # richiamo il metodo che va a splittare i dati in dati di train e dati di test
         X_train, Y_train, x_test, y_test = self.Split.split_Holdout()
@@ -60,6 +71,7 @@ class Evaluation:
         C_Metriche.salvare_metriche(Accuracy_rate, Error_rate, Sensitivity, Specificity, Geometric_mean)
         
         #plottare le metriche
+        C_Metriche.plot_metriche_holdout_e_media(Accuracy_rate, Error_rate, Sensitivity, Specificity, Geometric_mean)
 
         
 
