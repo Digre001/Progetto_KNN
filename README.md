@@ -1,64 +1,100 @@
 # Progetto_KNN
 
-## Panoramica
-Questo progetto implementa un classificatore k-Nearest Neighbors (k-NN) in Python, insieme a funzionalità di pre-elaborazione dei dati e valutazione del modello.
-L'obiettivo è consentire agli utenti di caricare un dataset, gestire i valori mancanti, sviluppare un classificatore k-NN e valutarne le prestazioni utilizzando diverse metriche e metodi di validazione.
+## Index
+- [Machine Learning Classifier for Tumor Classification](#1-machine-learning-classifier-for-tumor-classification)
+- [Enviroment set up](#2-enviroment-set-up)
+- [Overview](#3-overview)
+- [Input Requirements](#4-input-requirements)
+- [Output](#5-output)
 
-## Il programma consente agli utenti di specificare i seguenti parametri:
--   Gestione: chiede all'utente di scegliere il metodo piu appropriato da utilizzare per la gestione dei dati mancati nel Dataframe (eliminazione, media, moda, mediana)
--	Numero di vicini (k): chiede all'utente di inserire un numero intero per specificare il numero di vicini da studiare
--   Modello di valutazione (Holdout o Leave-p-out cross validation): chiede all'utente di selezionare il modello di valutazione,"H" per Holdout e "L" per Leave-p-out cross validation 
--   Train size: nel caso di modello di valutazione Holdout, chiede all'utente di inserire una percentuale float compresa tra 0 e 1 del database da usare nel training
--   Numero di campioni da studiare (p): nel caso di modello di valutazione Leave-p-out Cross Validation, chiede all'utente di inserire un numero di campioni da studiare 
--   Numero di esperimenti (K): nel caso di modello di valutazione Leave-p-out Cross Validation, chiede all'utente di inserire il numero di ripetizione dell' esperimento
--   Metriche da valutare: chiede al utente di scegliere quali metriche andare a studiare (Accuracy Rate, Error Rate, Sensitivity, Specificity, Geometric Mean)
+## Machine Learning Classifier for Tumor Classification
+Welcome to our repository for the development of a machine learning classifier aimed at classifying tumors as benign or malignant based on user-specified features. Our primary goal is to build a robust pipeline that trains and evaluates a model according to the provided characteristics.
 
-Gli input sono soggetti a dei controlli, (es. k deve essere un numero intero in caso contrario sara richiesto all'utente di reinserire un nuovo valore), tutti a parte p che richiede la consapevolezza dell' utente.
+## Enviroment set up
+Before running the code, it's important to take some precautions and set up your environment properly. Follow these steps:
+1. Create a Virtual Environment:
+   - Open your terminal or command prompt.
+   - Run the following command to create a virtual environment named "venv":` python -m venv venv`
+2. Activate the Virtual Environment:
+   - If you're using Windows:    `.\venv\Scripts\activate`
+   - If you're using Unix or MacOS:    `source ./venv/Scripts/activate`
+3. Deactivate the Environment (When Finished):
+   - Use the following command to deactivate the virtual environment:    `deactivate`
+4. Install Dependencies:
+   - After cloning the project and activating the virtual environment, install the required dependencies using:    `pip install -r requirements.txt`
+     This command downloads all the non-standard modules required by the application.
+5. If your Python version used to generate the virtual environment doesn't contain an updated version of pip, update pip using:  `pip install --upgrade pip `
+  
+Once you've set up your virtual environment and installed the dependencies, you're ready to run the application. Simply navigate to the `main.py` file and execute it.
 
-## Valutazione Individuale delle Sezioni di codice 
-In questa sezione viene riportato come andare a testare singole parti del progetto in particolare la parte di Preprocessing e di Knn (sviluppo del modello)  
-I file con le modifiche descritte in seguito si trovano nei branch es: `git checkout Preprocessing` porta al branch con il file F&L.py pronto per i test
 
-### Preprocessing 
-Richieste del Data Preprocessing:
-1. Caricare il dataset.
-1. Gestire i valori mancanti in modo appropriato (scegliete il modo che preferite, non c'è una risposta corretta).
-1. Dividere il dataset in features (variabili indipendenti) e target label (classe).
+## Overview
+This project focuses on three main stages:
 
-File Python utilizzati in questa sezione: ReaderCSV.py, ReaderFactory.py, DFInputer.py, F&L.py.
-Per poter testare singolarmente questa parte del progetto è necessario apportare delle modifiche al file F&L.py:  
-- Eliminare l'import statement del file input alla riga 3 del codice: `from input import Input`, e di conseguenza tutte le righe associate a questa riga, come la riga 9 `self.input = Input()` e la riga 26 `method = self.input.Gestione`.
-- Nella riga 28, togliere method e inserire tra virgolette una delle seguenti opzioni (drop, mean, median, mode). Ad esempio,   `df_ready = dfInputer(df).handle_missing_values("mean")`.
-- Aggiungere alla fine del codice le seguenti righe:
-    - `a = DataSplitter('test.csv')`
-    - `features, labels = a.process_data()`
-    - `print("Features:\n", features)`
-    - `print("Labels:\n", labels)`  
+- Data Preprocessing: We begin by loading the dataset and handling missing values in a manner of our choice. Subsequently, we split the dataset into features (independent variables) and target labels (classes).
 
-Dopo aver apportato le seguenti modifiche segliere il modo più appropiato per gestire i valori mancanti e runnare il codice, la riga 3 e 5 del file test.csv contengono valori mancanti.  
+- Model Development: Here, we develop a k-nearest neighbors (k-NN) classifier from scratch, avoiding the use of external libraries that already implement the k-NN classifier. The classifier computes the Euclidean distance between each sample in the test set and all samples in the training set to identify the k nearest neighbors. The class for each test sample is determined by the most common label among its k neighbors, with random selection in case of ties.
 
-### Knn 
-Richieste per lo sviluppo del modello:
-1. Sviluppare un classificatore k-nn da zero (senza utilizzare librerie esterne che abbiano già implementato il classificatore k-nn).
-1. Per ogni campione dell'insieme di test, calcolare la distanza da tutti i campioni del set di training e identificare i k campioni più vicini, utilizzando la distanza euclidea.
-1. Classificare ogni campione dell'insieme di test scegliendo l'etichetta più comune tra i k vicini. In caso di parità tra le etichette, scegliere in modo casuale.
+- Model Evaluation: We evaluate the model's performance through two approaches:
+    1. Holdout method, following specified percentages for training and testing data split.
+    1. Leave-p-out Cross Validarion, where p samples are left out for testing and the model is trained on the remaining samples, repeating this process for all possible combinations.
 
-Unico file python utilizzato per questa sezione: `M_Development.py`.
-Per testare singolarmente questa parte del progetto, è necessario apportare alcune modifiche al file `M_Development.py`:
+### Data Preprocessing
+In this section, we describe the data preprocessing steps involved in our pipeline. There are four files in this section, identified by filenames starting with an uppercase "B". These files facilitate data loading, ensuring it's in CSV format, and handle missing values through various methods (deletion, mean, mode, and median) chosen by user input. Once completed, the data is split into features and labels, followed by feature normalization.
 
-- Eliminare l'istruzione di importazione del file input alla riga 2 del codice: `from input import Input`, e di conseguenza tutte le righe associate a questa riga, come la riga 17 `self.input = Input()` e la riga 31 `k = self.input.k`.
-- Sostituire `self.input = Input()` della riga 17 con `self.k = k`.
-- Modificare `def __init__(self):` della riga 16 con `def __init__(self, k):`.
-- Modificare `k_ordinati = np.argsort(distanza)[:k]` della riga 33 con `k_ordinati = np.argsort(distanza)[:self.k]`.
-- Aggiungere alla fine del codice le seguenti righe:
-    - `X_train = np.array([[1, 2], [2, 3], [3, 4], [4, 5]])`
-    - `Y_train = np.array(['A', 'A', 'B', 'B'])`
-    - `X_test = np.array([[1, 1], [3, 3]])`
-    - `knn_classifier = Knn(k=2)`
-    - `knn_classifier.training(X_train, Y_train)`
-    - `predictions = knn_classifier.predizione(X_test)`
-    - `print("Previsioni:", predictions)`
+Files in this Section:
+- B_ReaderCSV.py
+- B_ReaderFactory.py
+- B_DFInputer.py
+- B_F_and_L.py
 
-Dopo aver apportato queste modifiche, eseguire il codice che restituirà due possibili risultati a causa della scelta casuale in caso di parità di vicini.  
-Nel branch Knn è presente un grafico che mostra i risultati dei test effettuato
+These preprocessing steps are crucial for preparing the dataset before training the machine learning model. They help ensure data integrity and improve the model's performance.
 
+### Model Development 
+This section outlines the model development process, focusing on the creation of a k-nearest neighbors (k-NN) classifier implemented in a single file. The files in this section are identified by filenames starting with an uppercase "C".
+
+Files in this Section:
+- C_Development.py
+
+This file encapsulates the core logic of the k-NN classifier and serves as the backbone of our model development process. Feel free to explore and extend this implementation to suit your specific requirements. 
+
+### Model Evalutation 
+This section elaborates on the model evaluation process, including data splitting, evaluation metrics computation, and the chosen method for validation. Files in this section are denoted by filenames starting with an uppercase "D".
+
+Files in this Section:
+- D_Evalutation.py
+- D_Metriche_L.py
+- D_Split_Data.py
+
+Ensure that you select the validation method that best suits your requirements and dataset characteristics. Feel free to explore and customize the evaluation metrics and validation techniques as needed for your specific application.
+
+## Input Requirements
+Before running the evaluation model, users need to provide certain inputs. Here's a description of the inputs required:
+1. Handling of Missing Values (Gestione):
+    - Users need to choose an appropriate method for handling missing values:
+        - Input: Integer value representing the selected method (e.g., 1 for drop, 2 for mean, etc.).
+          
+1. Number of Neighbors for KNN (k):
+     - Users specify the number of neighbors to consider in the K-nearest neighbors algorithm:
+        - Input: Integer value representing the number of neighbors (k).
+Evaluation Model Selection (Modello_valutazione):
+
+1. Users select the evaluation model, either Holdout or Leave-p-out Cross Validation:
+   - Input: Single character representing the chosen model (H for Holdout, L for Leave-p-out Cross Validation).
+     
+1. Training Set Size (train_size):
+    - For Holdout method, users specify the percentage of the dataset used for training:
+        -Input: Float value between 0 and 1 representing the percentage (e.g., 0.7 for 70%).
+    -If Leave-p-out Cross Validation is chosen, users specify the number of samples to study:
+        - Input: Integer value representing the number of samples (p).
+          
+1. Number of Experiments for Leave-p-out (N_esperimenti):
+    - If Leave-p-out Cross Validation is chosen, users specify the number of experiments to conduct:
+        - Input: Integer value representing the number of experiments (K).
+          
+1. Metrics Selection (Metriche):
+    - Users select the evaluation metrics to be used for assessing model performance:
+        - Input: Multiple metrics can be chosen based on the implemented function.
+Users are prompted to provide these inputs through the provided class methods. Ensure correct inputs are provided to facilitate accurate evaluation of the model's performance.
+
+## Output
