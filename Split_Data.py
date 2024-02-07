@@ -36,7 +36,7 @@ class Split_data:
         X_train_indices = self.features.sample(frac=self.train_size).index
 
         #Usando gli indici ottenuti sopra, seleziono le righe corrispondenti dal DataFrame originale delle features
-        X_train = self.features.loc(X_train_indices)
+        X_train = self.features.loc[X_train_indices]
 
         # Prendo i dati per il test. Sono tutti i dati che non sono stati presi per il training
         # questo lo faccio tramite drop rimuovendoi dal DataFrame le righe selezionate per il training
@@ -44,7 +44,7 @@ class Split_data:
 
         # Mi salvo le y di train corrispondenti alle x di train
         # selezionando i valori target corrispondenti algi indici delle righe selezionate per il training.
-        Y_train = self.target.loc(X_train_indices)
+        Y_train = self.target.loc[X_train_indices]
 
         # Mi salvo le y di test corrispondenti alle x di test
         # rimuovendo dalla Series dei target gli indici delle righe corrispondenti a quelle selezionate per il training.
