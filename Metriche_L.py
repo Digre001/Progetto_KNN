@@ -26,22 +26,22 @@ class Metriche:
            '''
     def calcolo_matrix_metriche(self):
         # calcolo la confusion Matrix:
-
-        # Calcolo il valore True Negative della confusion matrix
-        vero_negativo = sum(1 for y, predizioni in zip(self.y_test, self.previsioni) if (y == predizioni and predizioni == 2))
         # (zip mi serve per combinare gli elementi y_test e conforntarli con le previsioni e l'if quindi mi fa il conteggio
         # in questo caso solo se y e predizioni  coincidono con 2, quindi con 1 for y, ecc.. if ecc.. sto dicendo che mi genere un
         # 1 ogni qualvolta la condizione if è soddisfatta e poi con sum sommo tutti questi uni).
 
-        # Calcolo il valore True Positive della confusion matrix
-        vero_positivo = sum(1 for y, predizioni in zip(self.y_test, self.previsioni) if (y == predizioni and predizioni == 4))
-
-        # Calcolo il valore False Positive della confusion matrix
-        falso_positivo = sum(1 for y, predizioni in zip(self.y_test, self.previsioni) if (y != predizioni and predizioni == 2))
-
-        # Calcolo il valore False Negative della confusion matrix
-        falso_negativo = sum(1 for y, predizioni in zip(self.y_test, self.previsioni) if (y != predizioni and predizioni == 4))
-
+        # Calcolare il valore vero_negativo, vero_positivo, falso_positivo, falso_negativo dalla confusion matrix
+        vero_negativo = vero_positivo = falso_positivo = falso_negativo = 0
+        for y, predizioni in zip(self.y_test, self.previsioni):
+            #print (predizioni, y)
+            if y == predizioni and predizioni == 2:
+                vero_negativo += 1
+            elif y == predizioni and predizioni == 4:
+                vero_positivo += 1
+            elif y != predizioni and predizioni == 4:
+                falso_positivo += 1
+            elif y != predizioni and predizioni == 2:
+                falso_negativo += 1
         '''Calcolo effettivo delle metriche richieste mediante i valori della confusion matrix, precedentemente calcolati
                 '''
 
@@ -53,27 +53,27 @@ class Metriche:
         Specificity = 0
         Geometric_mean = 0
 
-        # Creo codizioni il quale mi dice se calcolare tale metriche o meno:
-        if 1 in self.metriche_scelte:
+         # Creo codizioni il quale mi dice se calcolare tale metriche o meno:
+        if 'Accuracy Rate' in self.metriche_scelte:
             # Percentuale di predizioni corrette rispetto al totale delle predizioni
             Accuracy_rate = (vero_negativo + vero_positivo) / self.y_test.size
 
-        if 2 in self.metriche_scelte:
+        if 'Error Rate' in self.metriche_scelte:
             # Percentuale di predizioni errate rispetto al totale delle predizioni
             Error_rate = (falso_positivo + falso_negativo) / self.y_test.size
 
-        if 3 in self.metriche_scelte:
+        if 'Sensitivity' in self.metriche_scelte and (vero_positivo + falso_negativo) !=0:
             # Capacità del modello di predire correttamente i valori positivi
             Sensitivity = (vero_positivo) / (vero_positivo + falso_negativo)
 
-        if 4 in self.metriche_scelte:
+        if 'Specificity' in self.metriche_scelte and (vero_negativo + falso_positivo) !=0:
             # Capacità del modello di predire correttamente i valori negativi
             Specificity = (vero_negativo) / (vero_negativo + falso_positivo)
 
-        if 5 in self.metriche_scelte:
+        if 'Geometric Mean' in self.metriche_scelte:
             # Media che bilancia valori positivi e negativi
             Geometric_mean = np.sqrt((Sensitivity * Specificity))
-
+        
         return Accuracy_rate, Error_rate, Sensitivity, Specificity, Geometric_mean
 
 

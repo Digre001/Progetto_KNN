@@ -69,7 +69,7 @@ class Evaluation:
         #Calcolo le metriche
         Accuracy_rate, Error_rate, Sensitivity, Specificity, Geometric_mean=C_Metriche.calcolo_matrix_metriche()
 
-        #Salvo le metriche in un file .txt
+        #Salvo le metriche in un file .xlsx
         C_Metriche.salvare_metriche(Accuracy_rate, Error_rate, Sensitivity, Specificity, Geometric_mean)
         
         #plottare le metriche
@@ -129,7 +129,7 @@ class Evaluation:
         Specificity_media = np.mean(Specificity_Lista)
         Geometric_mean_media = np.mean(Geometric_mean_Lista)
 
-        # richiamo il metodo che va a salvare le metriche calcolate, nel file Metriche.txt
+        # richiamo il metodo che va a salvare le metriche calcolate, nel file Metriche.xlsx
         Metriche.salvare_metriche(Accuracy_rate_media, Error_rate_media, Sensitivity_media, Specificity_media,Geometric_mean_media)
 
         # richiamo il metodo che va a plottare l'andamento le metriche calcolate
