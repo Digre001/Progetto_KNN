@@ -6,7 +6,7 @@ from B_F_and_L import DataSplitter
 if __name__ == '__main__':
     # Create instances of the Input and Preprocessing classes
     input= Input()
-    preprocessing = DataSplitter('test.csv')
+    preprocessing = DataSplitter('breast_cancer.csv')
 
     # Ask the user for the evaluation method and metrics to use
     input_presi = input.user_input()

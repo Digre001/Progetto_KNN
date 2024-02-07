@@ -1,5 +1,5 @@
 import pandas as pd
-
+import numpy as np
 
 class Split_data:
     '''
@@ -75,7 +75,7 @@ class Split_data:
         # Voglio calcolare tutte le combinazioni degli indici senza duplicati in modo tale poi da costruire i set
         # di train e i set di test
         indici_totali = list(range(n))
-        Combinazioni = tutte_le_combinazioni(indici_totali, self.p)
+        Combinazioni = tutte_le_combinazioni(indici_totali, self.p,self.N_esperimenti)
 
         # Limita il numero di combinazioni se specificato
         if self.N_esperimenti is not None and self.N_esperimenti < len(Combinazioni):
@@ -114,10 +114,21 @@ effetutato grazie alla ricorsione del metodo che verrà chiamto esso stesso nel 
 
 Indici: è la variabile della lunghezza delle righe del Dataset delle features
 k: lunghezza delle combinazioni desiderata
+lunghezza_massima: mi esce da questo metodo ricorsivo dopo che ha trovato almeno N_esperimenti combinazioni 
+    dove N_esperimenti viene inserito dall'utente
 current=[]: vettore vuoto che verrà aggiornato ogni qualvolta rientro ovvero il vettore ricorsivo che non viene 
     specificato all'esterno
+combinazioni_trovate: serve per confrontarlo con lunghezza massima in modo tale che qunado arriva allo stesso numero il
+    metodo ricorsivo si fermi
 '''
-def tutte_le_combinazioni(indici, k, indici_correnti=[]):
+def tutte_le_combinazioni(indici, k,lunghezza_massima, indici_correnti=[], combinazioni_trovate=0):
+    # Se troviamo il numero desiderato di combinazioni, interrompi la ricorsione
+    if combinazioni_trovate >= lunghezza_massima:
+        return []
+
+    # Mescola gli indici in modo casuale
+    shuffle_array(indici)
+
     # Questa condizione verifica se la lunghezza desiderata delle combinazioni è quella voluta (p). Quando k è zero,
     # significa che abbiamo raggiunto la lunghezza desiderata della combinazione, quindi restituiamo la lista contenente
     # la combinazione corrente. (ricordiamo è la combinazione degli indici del DataFrame
@@ -128,7 +139,25 @@ def tutte_le_combinazioni(indici, k, indici_correnti=[]):
     for i, indici_interni in enumerate(indici):
         # creo una nuova variabile con gli indici rimanenti ovvero scarto l'indice che considero alla posizione i
         remaining_indices = indici[i + 1:]
+        # Incrementa il numero di combinazioni trovate
+        combinazioni_trovate += len(combinazioni)
         # inserisco dentro combinations la combinazioni di indice quando k arriverà a 0
-        combinazioni.extend(tutte_le_combinazioni(remaining_indices, k - 1, indici_correnti + [indici_interni]))
+        combinazioni.extend(tutte_le_combinazioni(remaining_indices, k - 1, lunghezza_massima,indici_correnti + [indici_interni],combinazioni_trovate))
+
+    # Limita il numero di combinazioni trovate al massimo desiderato
+    if combinazioni_trovate > lunghezza_massima:
+        combinazioni = combinazioni[:lunghezza_massima]
 
     return combinazioni
+
+'''
+questo metodo mi riordina in modo casuale gli indici che gli verranno passati
+    '''
+def shuffle_array(arr):
+    n = len(arr)
+    for i in range(n):
+        # Generate a random index j such that i <= j < n
+        j = np.random.randint(i, n)
+        # Swap elements at indices i and j
+        arr[i], arr[j] = arr[j], arr[i]
+    return arr
