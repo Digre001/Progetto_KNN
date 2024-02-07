@@ -38,10 +38,10 @@ class Selection:
         print("Selezionare la gestione dei valori mancanti:\n1. Eliminazione\n2. Media\n3. Mediana\n4. Moda")
         # Dizionario che associa i numeri alle metriche
         associazione = {
-            1: 'Eliminazione',
-            2: 'Media',
-            3: 'Mediana',
-            4: 'Moda'
+            1: 'drop',
+            2: 'mean',
+            3: 'median',
+            4: 'mode'
         }
         while True:
             scelta = int(input("Inserire il numero corrispondete alla gestione dei valori mancanti: "))
