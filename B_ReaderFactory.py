@@ -1,4 +1,4 @@
-from readerCSV import ReaderCSV
+from B_ReaderCSV import ReaderCSV
 # classe factory per creare oggetti reader in base all'estensione del file 
 class Readerfactory:
 

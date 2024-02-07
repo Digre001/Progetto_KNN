@@ -1,4 +1,4 @@
-from selezione_input import Selection
+from A_selezione_input import Selection
 
 class Input:
     '''

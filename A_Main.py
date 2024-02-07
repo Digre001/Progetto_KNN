@@ -1,6 +1,6 @@
-from Evaluation import Evaluation
-from input import Input 
-from F_and_L import DataSplitter
+from D_Evaluation import Evaluation
+from A_input import Input
+from B_F_and_L import DataSplitter
 
 
 if __name__ == '__main__':
