@@ -89,7 +89,6 @@ class Evaluation:
         6. Analisi dei risultati: si analizzano le metriche trovate per capire quanto il mio modello generalizza sui dati sconosciuti
 
     '''
-
     def valutazione_leave_p_out(self):
         # Inizializzo le liste che conteranno i valori delle metriche calcolate per ogni iterazione
         Accuracy_rate_Lista = []
@@ -100,17 +99,17 @@ class Evaluation:
 
         # richiamo il metodo che va a splittare i dati in dati di train e dati di test
         X_train, Y_train, x_test, y_test = self.Split.slpit_leave_p_out()
-
+        
         # il processo viene ripetuto N_esperimenti (K) volte decisi dall'utente
         for _ in range(self.N_esperimenti):
             # Alleno il modello fornendogli i dati di training
-            Modello_knn = Knn(X_train[_], Y_train[_])
+            Modello_knn = Knn(X_train[_].to_numpy(), Y_train[_].to_numpy())
 
             # Effettuo la predizione con il modello allenato precedentemente
-            Previsioni = Modello_knn.predizione(x_test[_])
+            Previsioni = Modello_knn.predizione(x_test[_].to_numpy(), self.k)
 
             # Istanzio il file per lavorare con le metriche
-            C_Metriche = Metriche(y_test[_], Previsioni, self.metriche_scelte)
+            C_Metriche = Metriche(y_test[_].to_numpy(), Previsioni, self.metriche_scelte)
 
             # richiamo il metodo che va a calcolare le metriche, passandogli i dati di test e le predizioni
             Accuracy_rate, Error_rate, Sensitivity, Specificity, Geometric_mean = C_Metriche.calcolo_matrix_metriche()
@@ -129,11 +128,12 @@ class Evaluation:
         Specificity_media = np.mean(Specificity_Lista)
         Geometric_mean_media = np.mean(Geometric_mean_Lista)
 
+        C_Metriche = Metriche(y_test[_], Previsioni, self.metriche_scelte)
         # richiamo il metodo che va a salvare le metriche calcolate, nel file Metriche.xlsx
-        Metriche.salvare_metriche(Accuracy_rate_media, Error_rate_media, Sensitivity_media, Specificity_media,Geometric_mean_media)
+        C_Metriche.salvare_metriche(Accuracy_rate_media, Error_rate_media, Sensitivity_media, Specificity_media,Geometric_mean_media)
 
         # richiamo il metodo che va a plottare l'andamento le metriche calcolate
-        Metriche.plot_metriche_leave_p_out(Accuracy_rate_Lista, Error_rate_Lista, Sensitivity_Lista, Specificity_Lista,Geometric_mean_Lista)
+        C_Metriche.plot_metriche_leave_p_out(Accuracy_rate_Lista, Error_rate_Lista, Sensitivity_Lista, Specificity_Lista,Geometric_mean_Lista)
 
         # richiamo il metodo che va a plottare la media delle metriche calcolata
-        Metriche.plot_metriche_holdout_e_media(Accuracy_rate_Lista, Error_rate_Lista, Sensitivity_Lista, Specificity_Lista, Geometric_mean_Lista)
+        C_Metriche.plot_metriche_holdout_e_media(Accuracy_rate_media, Error_rate_media, Sensitivity_media, Specificity_media,Geometric_mean_media)

@@ -153,30 +153,40 @@ class Metriche:
             '''
     def plot_metriche_leave_p_out(self, Accuracy_rate: list, Error_rate: list, Sensitivity: list, Specificity: list,Geometric_mean: list):
         # Imposto la dimensione del grafico
-        plt.figure(figsize=(10, 5))
+        #plt.figure(figsize=(10, 5))
 
         # Con le seguenti operazioni plotto le metriche richieste
-        if 1 in self.metriche_scelte:
-            plt.plot(Accuracy_rate, marker='o', linestyle='solid', linewidth=2, markersize=5, color='blue',
-                     label='Accuracy Rate')
+        fig, axs = plt.subplots(5)  # Crea 5 subplot
+        lines = []  # Lista per contenere le linee del grafico
 
-        if 2 in self.metriche_scelte:
-            plt.plot(Error_rate, marker='o', linestyle='solid', linewidth=2, markersize=5, color='red',
-                     label='Error Rate')
+        if 'Accuracy Rate' in self.metriche_scelte:
+            line, = axs[0].plot(Accuracy_rate, marker='o', linestyle='solid', linewidth=2, markersize=5, color='blue',
+                                label='Accuracy Rate')
+            lines.append(line)
 
-        if 3 in self.metriche_scelte:
-            plt.plot(Sensitivity, marker='o', linestyle='solid', linewidth=2, markersize=5, color='yellow',
-                     label='Sensitivity')
+        if 'Error Rate' in self.metriche_scelte:
+            line, = axs[1].plot(Error_rate, marker='o', linestyle='solid', linewidth=2, markersize=5, color='red',
+                                label='Error Rate')
+            lines.append(line)
 
-        if 4 in self.metriche_scelte:
-            plt.plot(Specificity, marker='o', linestyle='solid', linewidth=2, markersize=5, color='green',
-                     label='Specificity')
+        if 'Sensitivity' in self.metriche_scelte:
+            line, = axs[2].plot(Sensitivity, marker='o', linestyle='solid', linewidth=2, markersize=5, color='yellow',
+                                label='Sensitivity')
+            lines.append(line)
 
-        if 5 in self.metriche_scelte:
-            plt.plot(Geometric_mean, marker='o', linestyle='solid', linewidth=2, markersize=5, color='orange',
-                     label='Geometric Mean')
+        if 'Specificity' in self.metriche_scelte:
+            line, = axs[3].plot(Specificity, marker='o', linestyle='solid', linewidth=2, markersize=5, color='green',
+                                label='Specificity')
+            lines.append(line)
 
-        plt.legend(loc='upper right')  # Imposto la posizione legenda nel grafico
+        if 'Geometric Mean' in self.metriche_scelte:
+            line, = axs[4].plot(Geometric_mean, marker='o', linestyle='solid', linewidth=2, markersize=5, color='orange',
+                                label='Geometric Mean')
+            lines.append(line)
+
+        # Aggiungi la legenda al grafico
+        fig.legend(lines, [l.get_label() for l in lines], loc='upper right')
+        
         plt.xlabel("Esperimenti")  # Imposto il nome dell'etichetta dell'asse x
         plt.ylabel("Valori")  # Imposto il nome dell'etichetta dell'asse y
         plt.title("Andamento delle metriche")  # Imposto il titolo del grafico

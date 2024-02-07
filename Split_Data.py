@@ -67,7 +67,7 @@ class Split_data:
            '''
     def slpit_leave_p_out(self):
         # creo in n il numero di righe del DataFrame delle features e in m le colonne.
-        n, m = self.features.shape[0], self.features.shape[1]
+        n = self.features.shape[0]
 
         # Inizializzo le variabili di output
         X_TRAIN, Y_TRAIN, X_TEST, Y_TEST = [], [], [], []
