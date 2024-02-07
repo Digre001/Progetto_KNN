@@ -25,13 +25,14 @@ class Evaluation:
            lista che contiene le metriche scelte dall'utente
 
        '''
-    def __init__(self, features: pd.DataFrame, target_lable: pd.Series, train_size: int, N_esperimenti: int, p, metriche_scelte: list):
+    def __init__(self, features: pd.DataFrame, target_lable: pd.Series, train_size: int, N_esperimenti: int, p, metriche_scelte: list,k):
         self.features = features
         self.target = target_lable
         self.train_size = train_size
         self.N_esperimenti = N_esperimenti
         self.metriche_scelte = metriche_scelte
         self.p = p
+        self.k = k
 
         #creo istanza per richiamare la classe Split_Data
         self.Split = Split_data(features, target_lable, train_size, N_esperimenti,p)
@@ -52,15 +53,18 @@ class Evaluation:
     def valutazione_holdout(self):
         # richiamo il metodo che va a splittare i dati in dati di train e dati di test
         X_train, Y_train, x_test, y_test = self.Split.split_Holdout()
-
+        X_train_array = X_train.to_numpy()
+        Y_train_array = Y_train.to_numpy()
+        x_test_array = x_test.to_numpy()
+        y_test_array = y_test.to_numpy()
         #Alleno il mio modello richiamado il Knn e passandogli i dati di train
-        Modello_knn=Knn(X_train,Y_train)
+        Modello_knn=Knn(X_train_array,Y_train_array)
 
         #effettue le previsioni con il modello addestrato alla riga di codice sopra
-        Previsioni=Modello_knn.predizione(x_test)
+        Previsioni=Modello_knn.predizione(x_test_array,self.k)
 
         #Istanzio il file per lavorare con le metriche
-        C_Metriche=Metriche(y_test,Previsioni,self.metriche_scelte)
+        C_Metriche=Metriche(y_test_array,Previsioni,self.metriche_scelte)
 
         #Calcolo le metriche
         Accuracy_rate, Error_rate, Sensitivity, Specificity, Geometric_mean=C_Metriche.calcolo_matrix_metriche()
