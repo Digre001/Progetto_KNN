@@ -116,48 +116,27 @@ Indici: è la variabile della lunghezza delle righe del Dataset delle features
 k: lunghezza delle combinazioni desiderata
 lunghezza_massima: mi esce da questo metodo ricorsivo dopo che ha trovato almeno N_esperimenti combinazioni 
     dove N_esperimenti viene inserito dall'utente
-current=[]: vettore vuoto che verrà aggiornato ogni qualvolta rientro ovvero il vettore ricorsivo che non viene 
-    specificato all'esterno
 combinazioni_trovate: serve per confrontarlo con lunghezza massima in modo tale che qunado arriva allo stesso numero il
     metodo ricorsivo si fermi
 '''
-def tutte_le_combinazioni(indici, k,lunghezza_massima, indici_correnti=[], combinazioni_trovate=0):
+def tutte_le_combinazioni(indici, k, lunghezza_massima, combinazioni_trovate=0):
+    # Questa condizione verifica se la lunghezza desiderata delle combinazioni è quella voluta (p). Quando k è zero,
+    # significa che abbiamo raggiunto la lunghezza desiderata della combinazione,
+    if k == 0:
+        return [[]] # Contiene una lista vuota cosi da interrompere la ricorsione
+
+    # Se non ci sono più indici disponibili, interrompe la ricorsione è un controllo per interrompere la ricorsione
+    # se si esagera nella ricerca di tutte le combinazioni possibili con pochi dati
+    if len(indici) == 0:
+        return []
+
     # Se troviamo il numero desiderato di combinazioni, interrompi la ricorsione
     if combinazioni_trovate >= lunghezza_massima:
         return []
 
-    # Mescola gli indici in modo casuale
-    shuffle_array(indici)
-
-    # Questa condizione verifica se la lunghezza desiderata delle combinazioni è quella voluta (p). Quando k è zero,
-    # significa che abbiamo raggiunto la lunghezza desiderata della combinazione, quindi restituiamo la lista contenente
-    # la combinazione corrente. (ricordiamo è la combinazione degli indici del DataFrame
-    if k == 0:
-        return [indici_correnti]
-
-    combinazioni = []
-    for i, indici_interni in enumerate(indici):
-        # creo una nuova variabile con gli indici rimanenti ovvero scarto l'indice che considero alla posizione i
-        remaining_indices = indici[i + 1:]
-        # Incrementa il numero di combinazioni trovate
-        combinazioni_trovate += len(combinazioni)
-        # inserisco dentro combinations la combinazioni di indice quando k arriverà a 0
-        combinazioni.extend(tutte_le_combinazioni(remaining_indices, k - 1, lunghezza_massima,indici_correnti + [indici_interni],combinazioni_trovate))
-
-    # Limita il numero di combinazioni trovate al massimo desiderato
-    if combinazioni_trovate > lunghezza_massima:
-        combinazioni = combinazioni[:lunghezza_massima]
+    # Ricorsivamente, generiamo tutte le combinazioni di lunghezza k, sia includendo che non includendo il primo elemento da indici
+    combinazioni = tutte_le_combinazioni(indici[1:], k, lunghezza_massima, combinazioni_trovate)
+    combinazioni.extend([ [indici[0]] + comb for comb in tutte_le_combinazioni(indici[1:], k - 1, lunghezza_massima, combinazioni_trovate + len(combinazioni))])
 
     return combinazioni
 
-'''
-questo metodo mi riordina in modo casuale gli indici che gli verranno passati
-    '''
-def shuffle_array(arr):
-    n = len(arr)
-    for i in range(n):
-        # Generate a random index j such that i <= j < n
-        j = np.random.randint(i, n)
-        # Swap elements at indices i and j
-        arr[i], arr[j] = arr[j], arr[i]
-    return arr
