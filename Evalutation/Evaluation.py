@@ -104,10 +104,11 @@ class Evaluation:
         # il processo viene ripetuto N_esperimenti (K) volte decisi dall'utente
         for _ in range(self.N_esperimenti):
             # Alleno il modello fornendogli i dati di training
-            Modello_knn = Knn(X_train[_].to_numpy(), Y_train[_].to_numpy())
+            Modello_knn = Knn(self.k)
+            Modello_knn.training(X_train[_].to_numpy(), Y_train[_].to_numpy())
 
             # Effettuo la predizione con il modello allenato precedentemente
-            Previsioni = Modello_knn.predizione(x_test[_].to_numpy(), self.k)
+            Previsioni = Modello_knn.predizione(x_test[_].to_numpy())
 
             # Istanzio il file per lavorare con le metriche
             C_Metriche = Metriche(y_test[_].to_numpy(), Previsioni, self.metriche_scelte)

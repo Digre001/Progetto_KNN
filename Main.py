@@ -2,30 +2,33 @@ from Evalutation.Evaluation import Evaluation
 from INPUT.input import Input
 from Preprocessing.F_and_L import DataSplitter
 
+# Crea un'istanza della classe Input
+input_instance = Input()
 
-if __name__ == '__main__':
-    # Create instances of the Input and Preprocessing classes
-    input= Input()
-    preprocessing = DataSplitter('breast_cancer.csv')
+# Crea un'istanza della classe DataSplitter e passa il nome del file CSV
+preprocessing = DataSplitter('breast_cancer.csv')
 
-    # Ask the user for the evaluation method and metrics to use
-    input_presi = input.user_input()
-    N_esperimenti = input_presi['N_esperimenti']
-    method = input_presi['Gestione']
-    # Split the dataset into features and target label
-    features, labels = preprocessing.process_data(method)
-    
-    # Ask the user for the percentage of data to use for training and the number of neighbors to consider
-    train_size = input_presi['train_size']
-    Modello_valutazione = input_presi['Modello_valutazione']
-    p = input_presi['p']
-    Metriche = input_presi['Metriche']
-    k= input_presi['k']
+# Ottieni l'input dall'utente
+input_taken = input_instance.user_input()
 
-    #  Create an instance of the Evaluation class to evaluate the model's performance
-    Eval = Evaluation(features, labels, train_size, N_esperimenti, p, Metriche, k)
+# Estrai le informazioni necessarie dall'input utente
+N_esperimenti = input_taken['N_esperimenti']
+method = input_taken['Gestione']
+train_size = input_taken['train_size']
+Modello_valutazione = input_taken['Modello_valutazione']
+p = input_taken['p']
+Metriche = input_taken['Metriche']
+k = input_taken['k']
 
-    if Modello_valutazione  == "h":
-        Eval.valutazione_holdout()
-    else:
-        Eval.valutazione_leave_p_out()
+# Preprocessa i dati utilizzando il metodo specificato
+features, labels = preprocessing.process_data(method)
+
+# Crea un'istanza della classe Evaluation con le caratteristiche e le etichette pre-elaborate
+Eval = Evaluation(features, labels, train_size, N_esperimenti, p, Metriche, k)
+
+# Valuta il modello utilizzando Holdout o Leave-p-out a seconda della scelta dell'utente
+if Modello_valutazione == "h":
+    Eval.valutazione_holdout()
+else:
+    Eval.valutazione_leave_p_out()
+
