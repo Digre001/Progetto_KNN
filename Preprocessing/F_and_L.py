@@ -1,5 +1,5 @@
-from B_DFInputer import DfInputer
-from B_ReaderFactory import Readerfactory
+from Preprocessing.DFInputer import DfInputer
+from Preprocessing.ReaderFactory import Readerfactory
 
 class DataSplitter:
     def __init__(self, file_name):

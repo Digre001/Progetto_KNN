@@ -1,9 +1,9 @@
 # Importo le librerie necessarie
 import pandas as pd
 import numpy as np
-from D_Split_Data import Split_data
-from C_Development import Knn
-from D_Metriche_L import Metriche
+from Evalutation.Split_Data import Split_data
+from KNNalgorithm.KNN import Knn
+from Evalutation.Metriche_L import Metriche
 
 class Evaluation:
     '''

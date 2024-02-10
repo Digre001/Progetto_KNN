@@ -1,11 +1,11 @@
 # Progetto_KNN
 
 ## Index
-- [Machine Learning Classifier for Tumor Classification](#1-machine-learning-classifier-for-tumor-classification)
-- [Enviroment set up](#2-enviroment-set-up)
-- [Overview](#3-overview)
-- [Input Requirements](#4-input-requirements)
-- [Output](#5-output)
+- [Machine Learning Classifier for Tumor Classification](#machine-learning-classifier-for-tumor-classification)
+- [Enviroment set up](#enviroment-set-up)
+- [Overview](#overview)
+- [Input Requirements](#input-requirements)
+- [Output](#output)
 
 ## Machine Learning Classifier for Tumor Classification
 Welcome to our repository for the development of a machine learning classifier aimed at classifying tumors as benign or malignant based on user-specified features. Our primary goal is to build a robust pipeline that trains and evaluates a model according to the provided characteristics.
