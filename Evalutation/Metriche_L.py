@@ -62,7 +62,7 @@ class Metriche:
             # Percentuale di predizioni errate rispetto al totale delle predizioni
             Error_rate = (falso_positivo + falso_negativo) / self.y_test.size
 
-        if 'Sensitivity' in self.metriche_scelte and (vero_positivo + falso_negativo) !=0:
+        if 'Sensitivity'  in self.metriche_scelte and (vero_positivo + falso_negativo) !=0:
             # Capacità del modello di predire correttamente i valori positivi
             Sensitivity = (vero_positivo) / (vero_positivo + falso_negativo)
 
@@ -70,9 +70,9 @@ class Metriche:
             # Capacità del modello di predire correttamente i valori negativi
             Specificity = (vero_negativo) / (vero_negativo + falso_positivo)
 
-        if 'Geometric Mean' in self.metriche_scelte:
+        if 'Geometric Mean' in self.metriche_scelte and (vero_positivo + falso_negativo) !=0 and (vero_negativo + falso_positivo) !=0:
             # Media che bilancia valori positivi e negativi
-            Geometric_mean = np.sqrt((Sensitivity * Specificity))
+            Geometric_mean = np.sqrt(((vero_positivo) / (vero_positivo + falso_negativo) * (vero_negativo) / (vero_negativo + falso_positivo)))
         
         return Accuracy_rate, Error_rate, Sensitivity, Specificity, Geometric_mean
 

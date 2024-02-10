@@ -12,11 +12,14 @@ class Knn:
         - predizione(self, X): Metodo per fare previsioni su nuovi dati basandosi sui vicini più prossimi.
         - distanza_euclidea(self, x_1, x_2): Metodo per calcolare la distanza euclidea tra due vettori.
 '''
-    def __init__(self, X, Y):
+    def __init__(self, k):
+        self.k = k
+
+    def training(self, X, Y):
         self.X_train = X
         self.Y_train = Y
     
-    def predizione(self, X, k):
+    def predizione(self, X):
         # Inizializza una lista vuota per contenere le previsioni
         hope = []
         # Per ogni elemento in X (i dati per i quali vogliamo fare previsioni)
@@ -24,7 +27,7 @@ class Knn:
             # Calcola le distanze euclidee tra l'elemento i e tutti i punti di addestramento in X_train
             distanza = [self.__distanza_euclidea(i, j) for j in self.X_train]
             # Ottieni gli indici ordinati delle distanze più basse (i k vicini più prossimi)
-            k_ordinati = np.argsort(distanza)[:k]
+            k_ordinati = np.argsort(distanza)[:self.k]
             # Ottieni i target corrispondenti agli indici ordinati
             k_vicini = [self.Y_train[a] for a in k_ordinati]
             # Conta le occorrenze di ciascun target tra i k vicini

@@ -58,10 +58,11 @@ class Evaluation:
         x_test_array = x_test.to_numpy()
         y_test_array = y_test.to_numpy()
         #Alleno il mio modello richiamado il Knn e passandogli i dati di train
-        Modello_knn=Knn(X_train_array,Y_train_array)
+        Modello_knn=Knn(self.k)
+        train = Modello_knn.training(X_train_array,Y_train_array)
 
         #effettue le previsioni con il modello addestrato alla riga di codice sopra
-        Previsioni=Modello_knn.predizione(x_test_array,self.k)
+        Previsioni=Modello_knn.predizione(x_test_array)
 
         #Istanzio il file per lavorare con le metriche
         C_Metriche=Metriche(y_test_array,Previsioni,self.metriche_scelte)
