@@ -40,31 +40,34 @@ This project focuses on three main stages:
     1. Leave-p-out Cross Validarion, where p samples are left out for testing and the model is trained on the remaining samples, repeating this process for all possible combinations.
 
 ### Data Preprocessing
-In this section, we describe the data preprocessing steps involved in our pipeline. There are four files in this section, identified by filenames starting with an uppercase "B". These files facilitate data loading, ensuring it's in CSV format, and handle missing values through various methods (deletion, mean, mode, and median) chosen by user input. Once completed, the data is split into features and labels, followed by feature normalization.
+In this section, we describe the data preprocessing steps involved in our pipeline. There are four files in this section, which are now located within a folder named "Preprocessing." These files facilitate data loading, ensuring it's in CSV format, and handle missing values through various methods (deletion, mean, mode, and median) chosen by user input. Once completed, the data is split into features and labels, followed by feature normalization.
 
 Files in this Section:
-- B_ReaderCSV.py
-- B_ReaderFactory.py
-- B_DFInputer.py
-- B_F_and_L.py
+
+preprocessing/ReaderCSV.py  
+preprocessing/ReaderFactory.py  
+preprocessing/DFInputer.py  
+preprocessing/F_and_L.py  
 
 These preprocessing steps are crucial for preparing the dataset before training the machine learning model. They help ensure data integrity and improve the model's performance.
 
 ### Model Development 
-This section outlines the model development process, focusing on the creation of a k-nearest neighbors (k-NN) classifier implemented in a single file. The files in this section are identified by filenames starting with an uppercase "C".
+In this section, we outline the model development process, focusing on the creation of a k-nearest neighbors (k-NN) classifier implemented in a single file. The files in this section are now located within a folder named "KNNalgorithm"
 
 Files in this Section:
-- C_Development.py
+
+KNNalgorithm/KNN.py
 
 This file encapsulates the core logic of the k-NN classifier and serves as the backbone of our model development process. Feel free to explore and extend this implementation to suit your specific requirements. 
 
 ### Model Evalutation 
-This section elaborates on the model evaluation process, including data splitting, evaluation metrics computation, and the chosen method for validation. Files in this section are denoted by filenames starting with an uppercase "D".
+In this section, we elaborate on the model evaluation process, including data splitting, evaluation metrics computation, and the chosen method for validation. The files in this section are now located within a folder named "Evaluation."
 
 Files in this Section:
-- D_Evalutation.py
-- D_Metriche_L.py
-- D_Split_Data.py
+
+Evaluation/Evaluation.py  
+Evaluation/Metriche_L.py  
+Evaluation/Split_Data.py
 
 Ensure that you select the validation method that best suits your requirements and dataset characteristics. Feel free to explore and customize the evaluation metrics and validation techniques as needed for your specific application.
 

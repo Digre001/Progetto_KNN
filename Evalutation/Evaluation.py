@@ -59,7 +59,7 @@ class Evaluation:
         y_test_array = y_test.to_numpy()
         #Alleno il mio modello richiamado il Knn e passandogli i dati di train
         Modello_knn=Knn(self.k)
-        train = Modello_knn.training(X_train_array,Y_train_array)
+        Modello_knn.training(X_train_array,Y_train_array)
 
         #effettue le previsioni con il modello addestrato alla riga di codice sopra
         Previsioni=Modello_knn.predizione(x_test_array)
