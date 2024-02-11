@@ -1,4 +1,5 @@
 # Progetto_KNN
+To read the README.md in Italian, click [here](README_ita.md).
 
 ## Index
 - [Machine Learning Classifier for Tumor Classification](#machine-learning-classifier-for-tumor-classification)
