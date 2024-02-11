@@ -101,3 +101,51 @@ Evaluation Model Selection (Modello_valutazione):
 Users are prompted to provide these inputs through the provided class methods. Ensure correct inputs are provided to facilitate accurate evaluation of the model's performance.
 
 ## Output
+
+During program execution, various metrics are calculated to evaluate the classification model's performance. Below are the metrics calculated on a sample dataset ('breast_cancer.csv'):
+
+1. Accuracy Rate: This metric measures the percentage of correct predictions compared to the total predictions made by the model. In other words, it represents the overall precision of the model in correctly classifying dataset instances.
+
+2. Error Rate: This metric measures the percentage of incorrect predictions compared to the total predictions made by the model. It complements the Accuracy Rate and provides a measure of the percentage of errors in the model's classifications.
+
+3. Sensitivity: Also known as the True Positive Rate (TPR), this metric measures the model's ability to correctly identify positive instances (class of interest) compared to the total positive instances in the dataset. It indicates the proportion of true positives compared to the total true positives.
+
+4. Specificity: Also known as the True Negative Rate (TNR), this metric measures the model's ability to correctly identify negative instances compared to the total negative instances in the dataset. It indicates the proportion of true negatives compared to the total true negatives.
+
+5. Geometric Mean: This metric calculates the square root of the product of Sensitivity and Specificity. It is a measure of the geometric mean between these two metrics and is used to evaluate the balance between the model's ability to correctly predict positive and negative values. A high Geometric Mean indicates a good balance between Sensitivity and Specificity.
+
+All these metrics provide a comprehensive overview of the classification model's performance and are used to evaluate different aspects of its predictive ability. Additionally, there are graphs available that show the trend of metrics during the evaluation experiments. For example: the holdout metrics graph shows the distribution of metrics for a single experiment through a bar graph of the requested metrics; while the leave-p-out metrics graph shows the trend of metrics over multiple experiments, and there is also a bar graph showing the average of all metrics for all experiments.
+
+### Changes and Variations in Parameters
+The outputs described above could vary depending on how input parameters are entered by the user. Those that could bring about significant changes in the output of the classification model could be the k for the KNN neighbors study and the K to define the number of experiments to be run in the Leave_P_Out.
+
+-Varying k for KNN Neighbors, which determines the number of neighbors to consider during the classification of a point, can influence the complexity of the model and, consequently, the classification performance.
+
+   1. By reducing the value of k, the model could become more sensitive to local data details. This could lead to greater variation in predictions, especially in the presence of noisy data or many outliers.
+   
+   2. By increasing the value of k, the model tends to generalize more. In other words, the model makes decisions based on a larger number of data points, which would make the model less sensitive to local details, leading to a dilution of decision boundaries between classes, thus compromising the model's performance on more complex and/or noisy data.
+
+-Varying K, i.e., the number of Experiments to be run during leave-p-out cross-validation, could affect the robustness of the model evaluation.
+
+   1. By reducing the number of experiments, you get an estimate of the model's performance based on fewer dataset subdivisions. This could lead to greater variance in the estimates of evaluation metrics, as they are based on a smaller sample of data.
+   
+   2. By increasing the number of experiments, you get a more robust estimate of the model's performance, based on a greater number of dataset subdivisions. This could lead to greater stability in the estimates of evaluation metrics, reducing the uncertainty due to variability in training and test data.
+
+## Plots
+The graph illustrates the performance metrics obtained from leave-P-out cross-validation with 500 experiments:
+<img width="1528" alt="Andamento Metriche" src="https://github.com/Digre001/Progetto_KNN/assets/149874759/2d817625-9632-40f9-b356-7b13a1540ebe">
+
+The graph displays the average performance metrics derived from leave-P-out cross-validation with 500 experiments.
+<img width="1422" alt="Media Metriche" src="https://github.com/Digre001/Progetto_KNN/assets/149874759/9dcdeccf-677c-49c7-aa49-7feb9e906563">
+
+The graph illustrates the performance metrics obtained from the holdout method with a train size of 0.8:
+<img width="1271" alt="Metriche Holdout" src="https://github.com/Digre001/Progetto_KNN/assets/149874759/67542083-ba19-4c28-827a-aa890cac9661">
+
+
+
+
+
+
+
+
+
