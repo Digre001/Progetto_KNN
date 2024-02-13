@@ -13,10 +13,10 @@ class DataSplitter:
         # Estrai le label dal dataframe utilizzando solo la colonna delle label
         labels = df[label_column_name]
         # Restituisci le features e le label come risultato della suddivisione
-        return self.__normalizazzione(features), labels
+        return self.__standardizazzione(features), labels
     
-    def __normalizazzione(self, features):
-        # Normalizza solo le features
+    def __standardizazzione(self, features):
+        # standardizazzione delle sole features
         for column in features.columns:
             features[column] = (features[column] - features[column].mean()) / features[column].std()
         return features
