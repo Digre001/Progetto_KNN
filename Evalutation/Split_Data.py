@@ -1,5 +1,17 @@
 import pandas as pd
-import numpy as np
+
+'''
+    Classe per la divisione dei dati per l'addestramento e la valutazione dei modelli HoldOut e Leave_P_Out.
+
+    Il metdodo Split_Holdout che serve per splittare i dati che gli vengono formiti secondo una percentuale 
+    definita in input dall'utente
+
+    Il metodo Split_leave_p_out invece suddivide i dati per vari esperimenti sempre a seconda dell'utente e calcola 
+    tutte le combinazioni possibili da fare con p gruppi di test inseriti dall'utente, il quale sono diversi 
+    per ogni esperimento andando a vedere l'andamento di ogni esperimento come vaòutazione finale e 
+    anche la media di tutte le valutazioni fatte
+
+    '''
 
 class Split_data:
     '''
@@ -10,11 +22,11 @@ class Split_data:
         N_esperimenti: numero di esperimenti da fare per il leavePout corss validation
         '''
     def __init__(self, features: pd.DataFrame, target: pd.Series, train_size: int, N_esperimenti: int, p: int):
-        self.features = features
-        self.target = target
-        self.train_size = train_size
-        self.N_esperimenti=N_esperimenti
-        self.p=p
+        self.features = features  # DataFrame contenente le caratteristiche dei dati
+        self.target = target  # Serie contenente i valori target associati alle caratteristiche
+        self.train_size = train_size  # Percentuale di dati da utilizzare per la divisione dei dati mediante holdout
+        self.N_esperimenti = N_esperimenti  # Numero di esperimenti da eseguire per leave-P-out
+        self.p = p  # Numero di gruppi di dati di test da utilizzare per ogni esperimento nella leave-P-out
 
 
     '''
@@ -76,10 +88,6 @@ class Split_data:
         # di train e i set di test
         indici_totali = list(range(n))
         Combinazioni = tutte_le_combinazioni(indici_totali, self.p,self.N_esperimenti)
-
-        # Limita il numero di combinazioni se specificato
-        if self.N_esperimenti is not None and self.N_esperimenti < len(Combinazioni):
-            Combinazioni = Combinazioni[:self.N_esperimenti]
 
         # Per ogni combinazione creo set di training e set di test
         for indici_test in Combinazioni:  # in ogni iterazione del ciclo, indici_test assume il valore di una diversa combinazione di indici ottenuta da Combinazioni
