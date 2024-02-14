@@ -26,12 +26,13 @@ class Metriche:
            '''
     def calcolo_matrix_metriche(self):
         # calcolo la confusion Matrix:
-        # (zip mi serve per combinare gli elementi y_test e conforntarli con le previsioni e l'if quindi mi fa il conteggio
-        # in questo caso solo se y e predizioni  coincidono con 2, quindi con 1 for y, ecc.. if ecc.. sto dicendo che mi genere un
-        # 1 ogni qualvolta la condizione if è soddisfatta e poi con sum sommo tutti questi uni).
+        # sommo 1 alle variabili all'inizio messe a 0 ogni qualvolta viene soddisfatto l'if che mi serve
+        # quindi quando prevedo bene i negativi ovvero predizioni è uguale a 2 e il target era uguale a 2
+        # alloa aggiungo 1 a vero_negativo, uguale per tuttti gli altri
 
         # Calcolare il valore vero_negativo, vero_positivo, falso_positivo, falso_negativo dalla confusion matrix
         vero_negativo = vero_positivo = falso_positivo = falso_negativo = 0
+
         for y, predizioni in zip(self.y_test, self.previsioni):
             #print (predizioni, y)
             if y == predizioni and predizioni == 2:
@@ -81,7 +82,7 @@ class Metriche:
 
     '''
        In questo metodo le metriche calcolate precedentemente vengono salvate su un file questo file
-       si chiamerà "Metriche.xlsx" 
+       si chiamerà "Calcolo_Metriche.xlsx" 
 
       Le variabili da passare a questo metodo sono quelle calcolate con il metodo calcolo_matrix_metriche
       e sono:
